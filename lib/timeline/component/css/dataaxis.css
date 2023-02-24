@@ -10,6 +10,10 @@
   border-color: #e5e5e5;
 }
 
+.vis-panel.vis-background.vis-horizontal .vis-grid.vis-middle {
+  border-color: #c8cace;
+}
+
 .vis-panel.vis-background.vis-horizontal .vis-grid.vis-major {
   border-color: #bfbfbf;
 }
@@ -32,6 +36,13 @@
 
 
 .vis-data-axis .vis-y-axis.vis-minor {
+  position: absolute;
+  width: 100%;
+  color: #bebebe;
+  white-space: nowrap;
+}
+
+.vis-data-axis .vis-y-axis.vis-middle {
   position: absolute;
   width: 100%;
   color: #bebebe;
