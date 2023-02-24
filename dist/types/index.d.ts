@@ -160,6 +160,7 @@ export interface TimelineFormatLabelsOption {
 
 export interface TimelineFormatOption {
   minorLabels?: TimelineFormatLabelsOption | TimelineFormatLabelsFunction;
+  middleLabels?: TimelineFormatLabelsOption | TimelineFormatLabelsFunction;
   majorLabels?: TimelineFormatLabelsOption | TimelineFormatLabelsFunction;
 }
 
@@ -299,6 +300,7 @@ export interface TimelineOptions {
   sequentialSelection?: boolean;
   showCurrentTime?: boolean;
   showMajorLabels?: boolean;
+  showMiddleLabels?: boolean;
   showMinorLabels?: boolean;
   showWeekScale?: boolean;
   showTooltips?: boolean;
@@ -420,9 +422,11 @@ export interface Graph2dBarChartOption {
 export interface Graph2dDataAxisOption {
   orientation?: TimelineOptionsOrientationType;
   showMinorLabels?: boolean;
+  showMiddleLabels?: boolean;
   showMajorLabels?: boolean;
   showWeekScale?: boolean;
   majorLinesOffset?: number;
+  middleLinesOffset?: number;
   minorLinesOffset?: number;
   labelOffsetX?: number;
   labelOffsetY?: number;
@@ -480,6 +484,7 @@ export interface Graph2dOptions {
   sampling?: boolean;
   showCurrentTime?: boolean;
   showMajorLabels?: boolean;
+  showMiddleLabels?: boolean;
   showMinorLabels?: boolean;
   showWeekScale?: boolean;
   sort?: boolean;
