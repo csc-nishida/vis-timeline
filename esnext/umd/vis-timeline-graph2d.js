@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-24T06:06:54.799Z
+ * @date    2023-02-24T07:51:40.764Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -3260,8 +3260,8 @@
         this.dom.measureCharMiddle.appendChild(document.createTextNode('0'));
         this.dom.foreground.appendChild(this.dom.measureCharMiddle);
       }
-      this.props.middleCharHeight = this.dom.measureCharmiddle.clientHeight;
-      this.props.middleCharWidth = this.dom.measureCharmiddle.clientWidth;
+      this.props.middleCharHeight = this.dom.measureCharMiddle.clientHeight;
+      this.props.middleCharWidth = this.dom.measureCharMiddle.clientWidth;
     
       // determine the char width and height on the major axis
       if (!this.dom.measureCharMajor) {
