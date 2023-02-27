@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-27T04:35:05.209Z
+ * @date    2023-02-27T04:57:45.221Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18838,14 +18838,13 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       if (this.dom.middleTexts.at(-1)) {
         console.log('this.dom.middleTexts.at(-1).innerText:' + this.dom.middleTexts.at(-1).innerText);
         console.log('this.dom.middleTexts.at(-1).outerText:' + this.dom.middleTexts.at(-1).outerText);
-      }
+      } // let isSameLabel = false;
+      // same as the previous middle-label
+      // if (label && this.dom.middleTexts.at(-1) && 
+      //   this.dom.middleTexts.at(-1).innerText == label.innerText) {
+      //   isSameLabel = true;
+      // }
 
-      var isSameLabel = false; // same as the previous middle-label
-
-      if (label && this.dom.middleTexts.at(-1) && this.dom.middleTexts.at(-1).innerText == label.innerText) {
-        // label = null;
-        isSameLabel = true;
-      }
 
       if (!label) {
         // create new label
@@ -18858,7 +18857,13 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       this.dom.middleTexts.push(label); // for debug
       //console.log('this.dom.middleTexts:' + this.dom.middleTexts);
 
-      if (!isSameLabel) {
+      var prevText = '';
+
+      if (this.dom.middleTexts.at(-1).innerText) {
+        prevText = this.dom.middleTexts.at(-1).innerText;
+      }
+
+      if (prevText && text == prevText) {
         label.innerHTML = availableUtils.xss(text);
       } else {
         label.innerHTML = availableUtils.xss('');
