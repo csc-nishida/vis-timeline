@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-27T04:57:45.221Z
+ * @date    2023-02-27T05:08:26.520Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18869,7 +18869,9 @@
 	        prevText = this.dom.middleTexts.at(-1).innerText;
 	      }
 
-	      if (prevText && text == prevText) {
+	      console.log('prevText:' + prevText);
+
+	      if (prevText && text != prevText) {
 	        label.innerHTML = availableUtils.xss(text);
 	      } else {
 	        label.innerHTML = availableUtils.xss('');
