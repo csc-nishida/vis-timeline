@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-27T02:44:14.883Z
+ * @date    2023-02-27T03:04:51.784Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18831,12 +18831,25 @@
 	    key: "_repaintMiddleText",
 	    value: function _repaintMiddleText(x, text, orientation, className) {
 	      // reuse redundant label
-	      var label = this.dom.redundant.middleTexts.shift();
+	      var label = this.dom.redundant.middleTexts.shift(); // for debug
+
 	      console.log('label:' + label);
+
+	      if (label) {
+	        console.log('label.innerText:' + label.innerText);
+	        console.log('label.outerText:' + label.outerText);
+	      }
+
 	      console.log('this.dom.middleTexts.at(-1):' + this.dom.middleTexts.at(-1));
+
+	      if (this.dom.middleTexts.at(-1)) {
+	        console.log('this.dom.middleTexts.at(-1).innerText:' + this.dom.middleTexts.at(-1).innerText);
+	        console.log('this.dom.middleTexts.at(-1).outerText:' + this.dom.middleTexts.at(-1).outerText);
+	      }
+
 	      var isSame = false;
 
-	      if (label && this.dom.middleTexts.at(-1) === label) {
+	      if (label && this.dom.middleTexts.at(-1) == label) {
 	        label = null;
 	        isSame = true;
 	      }
@@ -18849,7 +18862,8 @@
 	        this.dom.foreground.appendChild(label);
 	      }
 
-	      this.dom.middleTexts.push(label);
+	      this.dom.middleTexts.push(label); // for debug
+
 	      console.log('this.dom.middleTexts:' + this.dom.middleTexts);
 
 	      if (!isSame) {
