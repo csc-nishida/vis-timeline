@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-27T02:05:59.796Z
+ * @date    2023-02-27T02:44:14.883Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -30476,8 +30476,7 @@
 	        }
 
 	        if (this.options.showMiddleLabels && showMiddleGrid) {
-	          var label = this._repaintMiddleText(x, step.getLabelMiddle(current), orientation, className);
-
+	          label = this._repaintMiddleText(x, step.getLabelMiddle(current), orientation, className);
 	          label.style.width = "".concat(width, "px"); // set width to prevent overflow
 	        }
 
@@ -30587,6 +30586,8 @@
 	    value: function _repaintMiddleText(x, text, orientation, className) {
 	      // reuse redundant label
 	      var label = this.dom.redundant.middleTexts.shift();
+	      console.log('label:' + label);
+	      console.log('this.dom.middleTexts.at(-1):' + this.dom.middleTexts.at(-1));
 	      var isSame = false;
 
 	      if (label && this.dom.middleTexts.at(-1) === label) {
@@ -30603,6 +30604,7 @@
 	      }
 
 	      this.dom.middleTexts.push(label);
+	      console.log('this.dom.middleTexts:' + this.dom.middleTexts);
 
 	      if (!isSame) {
 	        label.innerHTML = availableUtils.xss(text);
