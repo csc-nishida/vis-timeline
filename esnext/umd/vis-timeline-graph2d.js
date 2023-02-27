@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-27T05:18:56.867Z
+ * @date    2023-02-27T05:30:49.954Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -3068,15 +3068,20 @@
       
       // for debug
       console.log('text:' + text);
-      if (label) {
-        console.log('label.innerText:' + label.innerText);
-        console.log('label.outerText:' + label.outerText);
-      }
+      // if (label) {
+      //   console.log('label.innerText:' + label.innerText)
+      //   console.log('label.outerText:' + label.outerText)
+      // }
       // console.log('this.dom.middleTexts.at(-1):' + this.dom.middleTexts.at(-1));
       if (this.dom.middleTexts.at(-1)) {
         console.log('this.dom.middleTexts.at(-1).innerText:' + this.dom.middleTexts.at(-1).innerText);
         console.log('this.dom.middleTexts.at(-1).outerText:' + this.dom.middleTexts.at(-1).outerText);
       }
+      let prevText = '';
+      if (this.dom.middleTexts.at(-1).innerText) {
+        prevText = this.dom.middleTexts.at(-1).innerText;
+      }
+      console.log('prevText:' + prevText);
 
       // let isSameLabel = false;
       // same as the previous middle-label
@@ -3095,11 +3100,6 @@
 
       // for debug
       //console.log('this.dom.middleTexts:' + this.dom.middleTexts);
-      let prevText = '';
-      if (this.dom.middleTexts.at(-1).innerText) {
-        prevText = this.dom.middleTexts.at(-1).innerText;
-      }
-      console.log('prevText:' + prevText);
       if (text != prevText) {
         label.innerHTML = availableUtils.xss(text);
       } else {
