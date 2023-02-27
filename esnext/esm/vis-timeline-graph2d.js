@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-27T04:14:12.589Z
+ * @date    2023-02-27T04:35:05.209Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -3045,12 +3045,12 @@ class TimeAxis extends Component {
     let label = this.dom.redundant.middleTexts.shift();
     
     // for debug
-    console.log('label:' + label);
+    console.log('text:' + text);
     if (label) {
       console.log('label.innerText:' + label.innerText);
       console.log('label.outerText:' + label.outerText);
     }
-    console.log('this.dom.middleTexts.at(-1):' + this.dom.middleTexts.at(-1));
+    // console.log('this.dom.middleTexts.at(-1):' + this.dom.middleTexts.at(-1));
     if (this.dom.middleTexts.at(-1)) {
       console.log('this.dom.middleTexts.at(-1).innerText:' + this.dom.middleTexts.at(-1).innerText);
       console.log('this.dom.middleTexts.at(-1).outerText:' + this.dom.middleTexts.at(-1).outerText);
@@ -3060,7 +3060,7 @@ class TimeAxis extends Component {
     // same as the previous middle-label
     if (label && this.dom.middleTexts.at(-1) && 
       this.dom.middleTexts.at(-1).innerText == label.innerText) {
-      label = null;
+      // label = null;
       isSameLabel = true;
     }
     if (!label) {
