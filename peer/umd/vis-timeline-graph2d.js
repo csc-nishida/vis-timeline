@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-28T07:10:46.954Z
+ * @date    2023-02-28T07:55:11.887Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18604,7 +18604,8 @@
 	      props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
 	      props.minorLineWidth = 1; // TODO: really calculate width
 
-	      props.middleLineHeight = props.minorLineHeight + props.middleLineHeight;
+	      props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height); // props.middleLineHeight = props.minorLineHeight + props.middleLineHeight;
+
 	      props.middleLineWidth = 1; // TODO: really calculate width
 
 	      props.majorLineHeight = props.minorLineHeight + props.majorLabelHeight;
