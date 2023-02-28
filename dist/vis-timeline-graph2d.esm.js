@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-28T09:40:34.286Z
+ * @date    2023-02-28T09:57:27.204Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -28770,11 +28770,13 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       props.middleLabelHeight = showMiddleLabels ? props.middleCharHeight : 0;
       props.majorLabelHeight = showMajorLabels ? props.majorCharHeight : 0;
       props.height = props.minorLabelHeight + props.middleCharHeight + props.majorLabelHeight;
-      props.width = foreground.offsetWidth;
-      props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
-      props.minorLineWidth = 1; // TODO: really calculate width
+      props.width = foreground.offsetWidth; // props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight -
 
-      props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height); // props.middleLineHeight = props.minorLineHeight + props.middleLineHeight;
+      props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - props.minorLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
+      props.minorLineWidth = 1; // TODO: really calculate width
+      // props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight -
+
+      props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - props.minorLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height); // props.middleLineHeight = props.minorLineHeight + props.middleLineHeight;
 
       props.middleLineWidth = 1; // TODO: really calculate width
 
