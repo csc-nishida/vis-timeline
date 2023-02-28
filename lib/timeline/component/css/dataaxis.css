@@ -57,6 +57,14 @@
   width: auto;
 }
 
+.vis-data-axis .vis-y-axis.vis-middle.vis-measure {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  visibility: hidden;
+  width: auto;
+}
+
 .vis-data-axis .vis-y-axis.vis-title {
   position: absolute;
   color: #4d4d4d;
