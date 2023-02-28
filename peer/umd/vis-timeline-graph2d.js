@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-28T09:56:42.332Z
+ * @date    2023-02-28T10:22:45.958Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18970,8 +18970,9 @@
 	      this.dom.lines.push(line);
 	      var props = this.props;
 	      line.style.width = "".concat(width, "px");
-	      line.style.height = "".concat(props.minorLineHeight, "px");
-	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight : this.body.domProps.top.height;
+	      line.style.height = "".concat(props.minorLineHeight, "px"); // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight : this.body.domProps.top.height;
+
+	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height;
 	      var x = left - props.minorLineWidth / 2;
 
 	      this._setXY(line, x, y);
@@ -19006,8 +19007,9 @@
 	      this.dom.lines.push(line);
 	      var props = this.props;
 	      line.style.width = "".concat(width, "px");
-	      line.style.height = "".concat(props.middleLineHeight, "px");
-	      var y = orientation == 'top' ? props.majorLabelHeight : this.body.domProps.top.height;
+	      line.style.height = "".concat(props.middleLineHeight, "px"); // let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height;
+
+	      var y = orientation == 'top' ? props.majorLabelHeight : this.body.domProps.top.height + props.middleLabelHeight + props.minorLabelHeight;
 	      var x = left - props.middleLineWidth / 2;
 
 	      this._setXY(line, x, y);

@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-28T09:56:42.332Z
+ * @date    2023-02-28T10:22:45.958Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -3204,7 +3204,8 @@
       line.style.width = `${width}px`;
       line.style.height = `${props.minorLineHeight}px`;
 
-      let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight : this.body.domProps.top.height;
+      // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight : this.body.domProps.top.height;
+      let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: this.body.domProps.top.height;
       let x = left - props.minorLineWidth / 2;
 
       this._setXY(line, x, y);
@@ -3237,7 +3238,8 @@
       line.style.width = `${width}px`;
       line.style.height = `${props.middleLineHeight}px`;
 
-      let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height;
+      // let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height;
+      let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height + props.middleLabelHeight + props.minorLabelHeight;
       let x = left - props.middleLineWidth / 2;
 
       this._setXY(line, x, y);
