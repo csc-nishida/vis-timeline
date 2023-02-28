@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-28T10:22:45.958Z
+ * @date    2023-02-28T10:51:26.138Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18914,6 +18914,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       label.className = "vis-text vis-major ".concat(className); //label.title = title; // TODO: this is a heavy operation
 
       var y = orientation == 'top' ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight;
+      console.log('');
 
       this._setXY(label, x, y);
 
@@ -18966,8 +18967,10 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       line.style.width = "".concat(width, "px");
       line.style.height = "".concat(props.minorLineHeight, "px"); // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight : this.body.domProps.top.height;
 
-      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height;
+      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
       var x = left - props.minorLineWidth / 2;
+      console.log('minor_orientation: ' + orientation);
+      console.log('minor_Y: ' + y);
 
       this._setXY(line, x, y);
 
@@ -19003,8 +19006,10 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       line.style.width = "".concat(width, "px");
       line.style.height = "".concat(props.middleLineHeight, "px"); // let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height;
 
-      var y = orientation == 'top' ? props.majorLabelHeight : this.body.domProps.top.height + props.middleLabelHeight + props.minorLabelHeight;
+      var y = orientation == 'top' ? props.majorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
       var x = left - props.middleLineWidth / 2;
+      console.log('middle_orientation: ' + orientation);
+      console.log('middle_Y: ' + y);
 
       this._setXY(line, x, y);
 
@@ -19041,6 +19046,8 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       line.style.height = "".concat(props.majorLineHeight, "px");
       var y = orientation == 'top' ? 0 : this.body.domProps.top.height;
       var x = left - props.majorLineWidth / 2;
+      console.log('major_orientation: ' + orientation);
+      console.log('major_Y: ' + y);
 
       this._setXY(line, x, y);
 

@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-28T10:22:45.958Z
+ * @date    2023-02-28T10:51:26.138Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -3139,6 +3139,7 @@ class TimeAxis extends Component {
     //label.title = title; // TODO: this is a heavy operation
 
     let y = (orientation == 'top') ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight;
+    console.log('');
     this._setXY(label, x, y);
 
     this.dom.majorTexts.push(label);
@@ -3183,8 +3184,11 @@ class TimeAxis extends Component {
     line.style.height = `${props.minorLineHeight}px`;
 
     // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight : this.body.domProps.top.height;
-    let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: this.body.domProps.top.height;
+    let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
     let x = left - props.minorLineWidth / 2;
+
+    console.log('minor_orientation: ' + orientation);
+    console.log('minor_Y: ' + y);
 
     this._setXY(line, x, y);
     line.className = `vis-grid ${this.options.rtl ?  'vis-vertical-rtl' : 'vis-vertical'} vis-minor ${className}`;
@@ -3217,8 +3221,11 @@ class TimeAxis extends Component {
     line.style.height = `${props.middleLineHeight}px`;
 
     // let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height;
-    let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height + props.middleLabelHeight + props.minorLabelHeight;
+    let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
     let x = left - props.middleLineWidth / 2;
+
+    console.log('middle_orientation: ' + orientation);
+    console.log('middle_Y: ' + y);
 
     this._setXY(line, x, y);
     line.className = `vis-grid ${this.options.rtl ?  'vis-vertical-rtl' : 'vis-vertical'} vis-middle ${className}`;
@@ -3252,6 +3259,9 @@ class TimeAxis extends Component {
 
     let y = (orientation == 'top') ? 0 : this.body.domProps.top.height;
     let x = left - props.majorLineWidth / 2;
+
+    console.log('major_orientation: ' + orientation);
+    console.log('major_Y: ' + y);
 
     this._setXY(line, x, y);
     line.className = `vis-grid ${this.options.rtl ?  'vis-vertical-rtl' : 'vis-vertical'} vis-major ${className}`;
