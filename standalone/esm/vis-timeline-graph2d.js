@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-27T06:07:36.135Z
+ * @date    2023-02-28T07:10:46.954Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -30582,25 +30582,23 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
     value: function _repaintMiddleText(x, text, orientation, className) {
       // reuse redundant label
       var label = this.dom.redundant.middleTexts.shift(); // for debug
-
-      console.log('text:' + text); // if (label) {
+      // console.log('text:' + text)
+      // if (label) {
       //   console.log('label.innerText:' + label.innerText)
       //   console.log('label.outerText:' + label.outerText)
       // }
       // console.log('this.dom.middleTexts.at(-1):' + this.dom.middleTexts.at(-1));
-
-      var prevText = '';
-
-      if (this.dom.middleTexts.at(-1)) {
-        console.log('this.dom.middleTexts.at(-1).innerText:' + this.dom.middleTexts.at(-1).innerText);
-        console.log('this.dom.middleTexts.at(-1).outerText:' + this.dom.middleTexts.at(-1).outerText);
-        prevText = this.dom.middleTexts.at(-1).innerText;
-      } // if (this.dom.middleTexts.at(-1).innerText) {
+      // let prevText = '';
+      // if (this.dom.middleTexts.at(-1)) {
+      //   console.log('this.dom.middleTexts.at(-1).innerText:' + this.dom.middleTexts.at(-1).innerText);
+      //   console.log('this.dom.middleTexts.at(-1).outerText:' + this.dom.middleTexts.at(-1).outerText);
       //   prevText = this.dom.middleTexts.at(-1).innerText;
       // }
-
-
-      console.log('prevText:' + prevText); // let isSameLabel = false;
+      // if (this.dom.middleTexts.at(-1).innerText) {
+      //   prevText = this.dom.middleTexts.at(-1).innerText;
+      // }
+      // console.log('prevText:' + prevText);
+      // let isSameLabel = false;
       // same as the previous middle-label
       // if (label && this.dom.middleTexts.at(-1) && 
       //   this.dom.middleTexts.at(-1).innerText == label.innerText) {
@@ -46366,7 +46364,7 @@ var DataScale = /*#__PURE__*/function () {
   return DataScale;
 }();
 
-var css_248z = "\r\n.vis-panel.vis-background.vis-horizontal .vis-grid.vis-horizontal {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 0;\r\n  border-bottom: 1px solid;\r\n}\r\n\r\n.vis-panel.vis-background.vis-horizontal .vis-grid.vis-minor {\r\n  border-color: #e5e5e5;\r\n}\r\n\r\n.vis-panel.vis-background.vis-horizontal .vis-grid.vis-middle {\r\n  border-color: #c8cace;\r\n}\r\n\r\n.vis-panel.vis-background.vis-horizontal .vis-grid.vis-major {\r\n  border-color: #bfbfbf;\r\n}\r\n\r\n\r\n.vis-data-axis .vis-y-axis.vis-major {\r\n  width: 100%;\r\n  position: absolute;\r\n  color: #4d4d4d;\r\n  white-space: nowrap;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-major.vis-measure {\r\n  padding: 0;\r\n  margin: 0;\r\n  border: 0;\r\n  visibility: hidden;\r\n  width: auto;\r\n}\r\n\r\n\r\n.vis-data-axis .vis-y-axis.vis-minor {\r\n  position: absolute;\r\n  width: 100%;\r\n  color: #bebebe;\r\n  white-space: nowrap;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-middle {\r\n  position: absolute;\r\n  width: 100%;\r\n  color: #bebebe;\r\n  white-space: nowrap;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-minor.vis-measure {\r\n  padding: 0;\r\n  margin: 0;\r\n  border: 0;\r\n  visibility: hidden;\r\n  width: auto;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-title {\r\n  position: absolute;\r\n  color: #4d4d4d;\r\n  white-space: nowrap;\r\n  bottom: 20px;\r\n  text-align: center;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-title.vis-measure {\r\n  padding: 0;\r\n  margin: 0;\r\n  visibility: hidden;\r\n  width: auto;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-title.vis-left {\r\n  bottom: 0;\r\n  -webkit-transform-origin: left top;\r\n  -moz-transform-origin: left top;\r\n  -ms-transform-origin: left top;\r\n  -o-transform-origin: left top;\r\n  transform-origin: left bottom;\r\n  -webkit-transform: rotate(-90deg);\r\n  -moz-transform: rotate(-90deg);\r\n  -ms-transform: rotate(-90deg);\r\n  -o-transform: rotate(-90deg);\r\n  transform: rotate(-90deg);\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-title.vis-right {\r\n  bottom: 0;\r\n  -webkit-transform-origin: right bottom;\r\n  -moz-transform-origin: right bottom;\r\n  -ms-transform-origin: right bottom;\r\n  -o-transform-origin: right bottom;\r\n  transform-origin: right bottom;\r\n  -webkit-transform: rotate(90deg);\r\n  -moz-transform: rotate(90deg);\r\n  -ms-transform: rotate(90deg);\r\n  -o-transform: rotate(90deg);\r\n  transform: rotate(90deg);\r\n}\r\n\r\n.vis-legend {\r\n  background-color: rgba(247, 252, 255, 0.65);\r\n  padding: 5px;\r\n  border: 1px solid #b3b3b3;\r\n  box-shadow: 2px 2px 10px rgba(154, 154, 154, 0.55);\r\n}\r\n\r\n.vis-legend-text {\r\n  /*font-size: 10px;*/\r\n  white-space: nowrap;\r\n  display: inline-block\r\n}";
+var css_248z = "\r\n.vis-panel.vis-background.vis-horizontal .vis-grid.vis-horizontal {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 0;\r\n  border-bottom: 1px solid;\r\n}\r\n\r\n.vis-panel.vis-background.vis-horizontal .vis-grid.vis-minor {\r\n  border-color: #e5e5e5;\r\n}\r\n\r\n.vis-panel.vis-background.vis-horizontal .vis-grid.vis-middle {\r\n  border-color: #c8cace;\r\n}\r\n\r\n.vis-panel.vis-background.vis-horizontal .vis-grid.vis-major {\r\n  border-color: #bfbfbf;\r\n}\r\n\r\n\r\n.vis-data-axis .vis-y-axis.vis-major {\r\n  width: 100%;\r\n  position: absolute;\r\n  color: #4d4d4d;\r\n  white-space: nowrap;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-major.vis-measure {\r\n  padding: 0;\r\n  margin: 0;\r\n  border: 0;\r\n  visibility: hidden;\r\n  width: auto;\r\n}\r\n\r\n\r\n.vis-data-axis .vis-y-axis.vis-minor {\r\n  position: absolute;\r\n  width: 100%;\r\n  color: #bebebe;\r\n  white-space: nowrap;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-middle {\r\n  position: absolute;\r\n  width: 100%;\r\n  color: #bebebe;\r\n  white-space: nowrap;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-minor.vis-measure {\r\n  padding: 0;\r\n  margin: 0;\r\n  border: 0;\r\n  visibility: hidden;\r\n  width: auto;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-middle.vis-measure {\r\n  padding: 0;\r\n  margin: 0;\r\n  border: 0;\r\n  visibility: hidden;\r\n  width: auto;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-title {\r\n  position: absolute;\r\n  color: #4d4d4d;\r\n  white-space: nowrap;\r\n  bottom: 20px;\r\n  text-align: center;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-title.vis-measure {\r\n  padding: 0;\r\n  margin: 0;\r\n  visibility: hidden;\r\n  width: auto;\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-title.vis-left {\r\n  bottom: 0;\r\n  -webkit-transform-origin: left top;\r\n  -moz-transform-origin: left top;\r\n  -ms-transform-origin: left top;\r\n  -o-transform-origin: left top;\r\n  transform-origin: left bottom;\r\n  -webkit-transform: rotate(-90deg);\r\n  -moz-transform: rotate(-90deg);\r\n  -ms-transform: rotate(-90deg);\r\n  -o-transform: rotate(-90deg);\r\n  transform: rotate(-90deg);\r\n}\r\n\r\n.vis-data-axis .vis-y-axis.vis-title.vis-right {\r\n  bottom: 0;\r\n  -webkit-transform-origin: right bottom;\r\n  -moz-transform-origin: right bottom;\r\n  -ms-transform-origin: right bottom;\r\n  -o-transform-origin: right bottom;\r\n  transform-origin: right bottom;\r\n  -webkit-transform: rotate(90deg);\r\n  -moz-transform: rotate(90deg);\r\n  -ms-transform: rotate(90deg);\r\n  -o-transform: rotate(90deg);\r\n  transform: rotate(90deg);\r\n}\r\n\r\n.vis-legend {\r\n  background-color: rgba(247, 252, 255, 0.65);\r\n  padding: 5px;\r\n  border: 1px solid #b3b3b3;\r\n  box-shadow: 2px 2px 10px rgba(154, 154, 154, 0.55);\r\n}\r\n\r\n.vis-legend-text {\r\n  /*font-size: 10px;*/\r\n  white-space: nowrap;\r\n  display: inline-block\r\n}";
 styleInject(css_248z);
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof _Symbol !== "undefined" && _getIteratorMethod(o) || o["@@iterator"]; if (!it) { if (_Array$isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }

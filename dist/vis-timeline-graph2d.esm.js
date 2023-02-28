@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-27T06:08:20.803Z
+ * @date    2023-02-28T07:11:41.265Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -29003,25 +29003,23 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
     value: function _repaintMiddleText(x, text, orientation, className) {
       // reuse redundant label
       var label = this.dom.redundant.middleTexts.shift(); // for debug
-
-      console.log('text:' + text); // if (label) {
+      // console.log('text:' + text)
+      // if (label) {
       //   console.log('label.innerText:' + label.innerText)
       //   console.log('label.outerText:' + label.outerText)
       // }
       // console.log('this.dom.middleTexts.at(-1):' + this.dom.middleTexts.at(-1));
-
-      var prevText = '';
-
-      if (this.dom.middleTexts.at(-1)) {
-        console.log('this.dom.middleTexts.at(-1).innerText:' + this.dom.middleTexts.at(-1).innerText);
-        console.log('this.dom.middleTexts.at(-1).outerText:' + this.dom.middleTexts.at(-1).outerText);
-        prevText = this.dom.middleTexts.at(-1).innerText;
-      } // if (this.dom.middleTexts.at(-1).innerText) {
+      // let prevText = '';
+      // if (this.dom.middleTexts.at(-1)) {
+      //   console.log('this.dom.middleTexts.at(-1).innerText:' + this.dom.middleTexts.at(-1).innerText);
+      //   console.log('this.dom.middleTexts.at(-1).outerText:' + this.dom.middleTexts.at(-1).outerText);
       //   prevText = this.dom.middleTexts.at(-1).innerText;
       // }
-
-
-      console.log('prevText:' + prevText); // let isSameLabel = false;
+      // if (this.dom.middleTexts.at(-1).innerText) {
+      //   prevText = this.dom.middleTexts.at(-1).innerText;
+      // }
+      // console.log('prevText:' + prevText);
+      // let isSameLabel = false;
       // same as the previous middle-label
       // if (label && this.dom.middleTexts.at(-1) && 
       //   this.dom.middleTexts.at(-1).innerText == label.innerText) {
