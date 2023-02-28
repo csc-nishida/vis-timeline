@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-28T09:29:25.630Z
+ * @date    2023-02-28T09:40:34.286Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -28782,9 +28782,12 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       props.majorLineWidth = 1; // TODO: really calculate width
       // debug
 
+      console.log('body.domProps.root.height:' + this.body.domProps.root.height);
+      console.log('body.domProps.top.height:' + this.body.domProps.top.height);
+      console.log('body.domProps.bottom.height:' + this.body.domProps.bottom.height);
       console.log('props.minorLineHeight:' + props.minorLineHeight);
-      console.log('props.middleLabelHeight:' + props.middleLabelHeight);
-      console.log('props.majorLabelHeight:' + props.majorLabelHeight); //  take foreground and background offline while updating (is almost twice as fast)
+      console.log('props.middleLineHeight:' + props.middleLineHeight);
+      console.log('props.majorLineHeight:' + props.majorLineHeight); //  take foreground and background offline while updating (is almost twice as fast)
 
       var foregroundNextSibling = foreground.nextSibling;
       var backgroundNextSibling = background.nextSibling;
