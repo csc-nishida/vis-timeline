@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-01T00:41:34.814Z
+ * @date    2023-03-01T07:48:01.129Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -30730,6 +30730,9 @@
 	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
 	      var x = left - props.minorLineWidth / 2;
 	      console.log('minor_orientation: ' + orientation);
+	      console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
+	      console.log('props.middleLabelHeight: ' + props.middleLabelHeight);
+	      console.log('props.minorLabelHeight: ' + props.minorLabelHeight);
 	      console.log('minor_Y: ' + y);
 
 	      this._setXY(line, x, y);
@@ -30765,10 +30768,13 @@
 	      var props = this.props;
 	      line.style.width = "".concat(width, "px");
 	      line.style.height = "".concat(props.middleLineHeight, "px"); // let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height;
+	      // let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
 
-	      var y = orientation == 'top' ? props.majorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
+	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
 	      var x = left - props.middleLineWidth / 2;
 	      console.log('middle_orientation: ' + orientation);
+	      console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
+	      console.log('body.domProps.top.height: ' + this.body.domProps.top.height);
 	      console.log('middle_Y: ' + y);
 
 	      this._setXY(line, x, y);
