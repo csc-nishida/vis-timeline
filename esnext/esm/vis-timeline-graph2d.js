@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-02-28T10:51:26.138Z
+ * @date    2023-03-01T00:41:34.814Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -2823,12 +2823,12 @@ class TimeAxis extends Component {
     props.height = props.minorLabelHeight + props.middleCharHeight + props.majorLabelHeight;
     props.width = foreground.offsetWidth;
 
-    // props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight -
-    props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - props.minorLabelHeight -
+    props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight -
+    // props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - props.minorLabelHeight -
         (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
     props.minorLineWidth = 1; // TODO: really calculate width
-    // props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight -
-    props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - props.minorLabelHeight -
+    props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight -
+    // props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - props.minorLabelHeight -
         (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
     // props.middleLineHeight = props.minorLineHeight + props.middleLineHeight;
     props.middleLineWidth = 1; // TODO: really calculate width
