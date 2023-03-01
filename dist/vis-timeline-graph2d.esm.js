@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-01T09:26:16.514Z
+ * @date    2023-03-01T09:41:46.950Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -29122,8 +29122,9 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       line.style.height = "".concat(props.minorLineHeight, "px"); // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight : this.body.domProps.top.height;
       // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: 
       // offsetを加算(どうなる？)
+      // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: 
 
-      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + 4 : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
+      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + 7 : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
       var x = left - props.minorLineWidth / 2;
       console.log('minor_orientation: ' + orientation);
       console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
