@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-02T01:20:52.828Z
+ * @date    2023-03-02T01:39:07.724Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -28668,9 +28668,12 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
 
     _this._create();
 
-    _this.setOptions(options);
+    _this.setOptions(options); // display setting for middleLabel
 
-    _this.prevText = '';
+
+    _this.prevText = ''; // ajust border height
+
+    _this.minorLineHightOffset = 3;
     return _this;
   }
   /**
@@ -29123,7 +29126,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       // offsetを加算(どうなる？)
       // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: 
 
-      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
+      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset;
       var x = left - props.minorLineWidth / 2;
       console.log('minor_orientation: ' + orientation);
       console.log('props.majorLabelHeight: ' + props.majorLabelHeight);

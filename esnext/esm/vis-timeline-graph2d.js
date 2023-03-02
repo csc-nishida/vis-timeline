@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-02T01:20:07.447Z
+ * @date    2023-03-02T01:38:21.739Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -2714,8 +2714,10 @@ class TimeAxis extends Component {
     this._create();
 
     this.setOptions(options);
-
+    // display setting for middleLabel
     this.prevText = '';
+    // ajust border height
+    this.minorLineHightOffset = 3;
   }
 
   /**
@@ -3159,8 +3161,8 @@ class TimeAxis extends Component {
     // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: 
     // offsetを加算(どうなる？)
     // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: 
-    let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: 
-      this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
+    let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset: 
+      this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset;
     let x = left - props.minorLineWidth / 2;
 
     console.log('minor_orientation: ' + orientation);
