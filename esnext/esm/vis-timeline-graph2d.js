@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-02T01:38:21.739Z
+ * @date    2023-03-02T08:47:31.600Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -6187,6 +6187,9 @@ class Group {
       availableUtils.addClassName(this.dom.label, 'vis-nested-group');
       if (data.treeLevel) {
         availableUtils.addClassName(this.dom.label, 'vis-group-level-' + data.treeLevel);
+        this.dom.label.addEventListener('click', () => {
+          availableUtils.addClassName(this.dom.label, 'vis-control-selected');
+        });
       } else {
         // Nesting level is unknown, but we're sure it's at least 1
         availableUtils.addClassName(this.dom.label, 'vis-group-level-unknown-but-gte1');

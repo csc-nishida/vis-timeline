@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-02T01:38:21.739Z
+ * @date    2023-03-02T08:47:31.600Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -34355,6 +34355,8 @@
 	  }, {
 	    key: "setData",
 	    value: function setData(data) {
+	      var _this2 = this;
+
 	      if (this.itemSet.groupTouchParams.isDragging) return; // update contents
 
 	      var content;
@@ -34432,6 +34434,9 @@
 
 	        if (data.treeLevel) {
 	          availableUtils.addClassName(this.dom.label, 'vis-group-level-' + data.treeLevel);
+	          this.dom.label.addEventListener('click', function () {
+	            availableUtils.addClassName(_this2.dom.label, 'vis-control-selected');
+	          });
 	        } else {
 	          // Nesting level is unknown, but we're sure it's at least 1
 	          availableUtils.addClassName(this.dom.label, 'vis-group-level-unknown-but-gte1');
@@ -34591,7 +34596,7 @@
 	  }, {
 	    key: "_redrawItems",
 	    value: function _redrawItems(forceRestack, lastIsVisible, margin, range) {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      var restack = forceRestack || this.stackDirty || this.isVisible && !lastIsVisible; // if restacking, reposition visible items vertically
 
@@ -34626,11 +34631,11 @@
 	        var getVisibleItems = function getVisibleItems() {
 	          var _context8, _context9, _context10;
 
-	          var visibleItems = _this2._updateItemsInRange(orderedItems, _filterInstanceProperty(_context8 = _this2.visibleItems).call(_context8, function (item) {
+	          var visibleItems = _this3._updateItemsInRange(orderedItems, _filterInstanceProperty(_context8 = _this3.visibleItems).call(_context8, function (item) {
 	            return !item.isCluster;
 	          }), range);
 
-	          var visibleClusters = _this2._updateClustersInRange(orderedClusters, _filterInstanceProperty(_context9 = _this2.visibleItems).call(_context9, function (item) {
+	          var visibleClusters = _this3._updateClustersInRange(orderedClusters, _filterInstanceProperty(_context9 = _this3.visibleItems).call(_context9, function (item) {
 	            return item.isCluster;
 	          }), range);
 
@@ -34649,7 +34654,7 @@
 	          var _loop2 = function _loop2(subgroup) {
 	            var _context11;
 
-	            var items = _filterInstanceProperty(_context11 = _this2.visibleItems).call(_context11, function (item) {
+	            var items = _filterInstanceProperty(_context11 = _this3.visibleItems).call(_context11, function (item) {
 	              return item.data.subgroup === subgroup;
 	            });
 
@@ -34658,7 +34663,7 @@
 	            }) : items;
 	          };
 
-	          for (var subgroup in _this2.subgroups) {
+	          for (var subgroup in _this3.subgroups) {
 	            _loop2(subgroup);
 	          }
 
@@ -34801,7 +34806,7 @@
 	  }, {
 	    key: "redraw",
 	    value: function redraw(range, margin, forceRestack, returnQueue) {
-	      var _this3 = this,
+	      var _this4 = this,
 	          _context17,
 	          _context18,
 	          _context21,
@@ -34812,37 +34817,37 @@
 	      var lastIsVisible = this.isVisible;
 	      var height;
 	      var queue = [function () {
-	        forceRestack = _this3._didMarkerHeightChange.call(_this3) || forceRestack;
+	        forceRestack = _this4._didMarkerHeightChange.call(_this4) || forceRestack;
 	      }, // recalculate the height of the subgroups
 	      _bindInstanceProperty$1(_context17 = this._updateSubGroupHeights).call(_context17, this, margin), // calculate actual size and position
 	      _bindInstanceProperty$1(_context18 = this._calculateGroupSizeAndPosition).call(_context18, this), function () {
 	        var _context19;
 
-	        _this3.isVisible = _bindInstanceProperty$1(_context19 = _this3._isGroupVisible).call(_context19, _this3)(range, margin);
+	        _this4.isVisible = _bindInstanceProperty$1(_context19 = _this4._isGroupVisible).call(_context19, _this4)(range, margin);
 	      }, function () {
 	        var _context20;
 
-	        _bindInstanceProperty$1(_context20 = _this3._redrawItems).call(_context20, _this3)(forceRestack, lastIsVisible, margin, range);
+	        _bindInstanceProperty$1(_context20 = _this4._redrawItems).call(_context20, _this4)(forceRestack, lastIsVisible, margin, range);
 	      }, // update subgroups
 	      _bindInstanceProperty$1(_context21 = this._updateSubgroupsSizes).call(_context21, this), function () {
 	        var _context22;
 
-	        height = _bindInstanceProperty$1(_context22 = _this3._calculateHeight).call(_context22, _this3)(margin);
+	        height = _bindInstanceProperty$1(_context22 = _this4._calculateHeight).call(_context22, _this4)(margin);
 	      }, // calculate actual size and position again
 	      _bindInstanceProperty$1(_context23 = this._calculateGroupSizeAndPosition).call(_context23, this), function () {
 	        var _context24;
 
-	        resized = _bindInstanceProperty$1(_context24 = _this3._didResize).call(_context24, _this3)(resized, height);
+	        resized = _bindInstanceProperty$1(_context24 = _this4._didResize).call(_context24, _this4)(resized, height);
 	      }, function () {
 	        var _context25;
 
-	        _bindInstanceProperty$1(_context25 = _this3._applyGroupHeight).call(_context25, _this3)(height);
+	        _bindInstanceProperty$1(_context25 = _this4._applyGroupHeight).call(_context25, _this4)(height);
 	      }, function () {
 	        var _context26;
 
-	        _bindInstanceProperty$1(_context26 = _this3._updateItemsVerticalPosition).call(_context26, _this3)(margin);
+	        _bindInstanceProperty$1(_context26 = _this4._updateItemsVerticalPosition).call(_context26, _this4)(margin);
 	      }, _bindInstanceProperty$1(_context27 = function _context27() {
-	        if (!_this3.isVisible && _this3.height) {
+	        if (!_this4.isVisible && _this4.height) {
 	          resized = false;
 	        }
 
@@ -34871,7 +34876,7 @@
 	  }, {
 	    key: "_updateSubGroupHeights",
 	    value: function _updateSubGroupHeights(margin) {
-	      var _this4 = this;
+	      var _this5 = this;
 
 	      if (_Object$keys(this.subgroups).length > 0) {
 	        var me = this;
@@ -34881,7 +34886,7 @@
 	        _forEachInstanceProperty(availableUtils).call(availableUtils, this.visibleItems, function (item) {
 	          if (item.data.subgroup !== undefined) {
 	            me.subgroups[item.data.subgroup].height = Math.max(me.subgroups[item.data.subgroup].height, item.height + margin.item.vertical);
-	            me.subgroups[item.data.subgroup].visible = typeof _this4.subgroupVisibility[item.data.subgroup] === 'undefined' ? true : Boolean(_this4.subgroupVisibility[item.data.subgroup]);
+	            me.subgroups[item.data.subgroup].visible = typeof _this5.subgroupVisibility[item.data.subgroup] === 'undefined' ? true : Boolean(_this5.subgroupVisibility[item.data.subgroup]);
 	          }
 	        });
 	      }
