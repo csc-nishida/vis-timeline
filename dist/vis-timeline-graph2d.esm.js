@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-02T08:48:25.702Z
+ * @date    2023-03-02T09:01:41.916Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -32805,6 +32805,7 @@ var Group = /*#__PURE__*/function () {
         if (data.treeLevel) {
           availableUtils.addClassName(this.dom.label, 'vis-group-level-' + data.treeLevel);
           this.dom.label.addEventListener('click', function () {
+            console.log('クリックイベント追加');
             availableUtils.addClassName(_this2.dom.label, 'vis-control-selected');
           });
         } else {
