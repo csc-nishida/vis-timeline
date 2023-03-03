@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-03T08:35:58.062Z
+ * @date    2023-03-03T08:49:16.855Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -29018,7 +29018,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
 
       if (!label) {
         // create new label
-        var content = document.createTextNode('　');
+        var content = document.createTextNode('');
         label = document.createElement('div');
         label.appendChild(content);
         this.dom.foreground.appendChild(label);
@@ -29030,7 +29030,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       if (text != this.prevText) {
         label.innerHTML = availableUtils.xss(text);
       } else {
-        label.innerHTML = availableUtils.xss('');
+        label.innerHTML = availableUtils.xss('　');
       }
 
       this.prevText = text;
