@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-03T10:11:50.859Z
+ * @date    2023-03-03T10:25:39.340Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -2740,7 +2740,12 @@
       this.prevText = '';
       // ajust border height
       this.minorLineHightOffset = 3;
+      // 実行日付
+      this.date;
+      // 現在時刻範囲
+      this.isStarted = false;
     }
+
 
     /**
      * Set options for the TimeAxis.
@@ -2944,6 +2949,8 @@
       let count = 0;
       const MAX = 1000;
       let className;
+      // TODO 仮設定(日付を受け取るようにすること)
+      let date = new Date();
 
       step.start();
       next = step.getCurrent();
@@ -2980,7 +2987,7 @@
         }
 
         if (this.options.showMiddleLabels && showMiddleGrid) {
-          label = this._repaintMiddleText(x, step.getLabelMiddle(current), orientation, className);
+          label = this._repaintMiddleText(x, step.getLabelMiddle(current), orientation, className, date);
           label.style.width = `${width}px`; // set width to prevent overflow
         }
 
@@ -3075,10 +3082,11 @@
      * @param {string} text
      * @param {string} orientation   "top" or "bottom" (default)
      * @param {string} className
+     * @param {Date} date 
      * @return {Element} Returns the HTML element of the created label
      * @private
      */
-    _repaintMiddleText(x, text, orientation, className) {
+    _repaintMiddleText(x, text, orientation, className, date) {
       // reuse redundant label
       let label = this.dom.redundant.middleTexts.shift();
       
@@ -3103,7 +3111,16 @@
       let y = (orientation == 'top') ? this.props.majorLabelHeight : 0;
       this._setXY(label, x, y);
 
-      label.className = `vis-text vis-middle ${className}`;
+      if (!this.isStarted && ('0' + date.getHours()).slice(-2) == text) {
+        this.isStarted = true;
+      } else if (this.isStarted && ('0' + date.getHours()).slice(-2) != text) {
+        this.isStarted = false;
+      }
+      if (this.isStarted) {
+        label.className = `vis-text vis-middle vis-ontime ${className}`;
+      }  else {
+        label.className = `vis-text vis-middle ${className}`;
+      }
       //label.title = title;  // TODO: this is a heavy operation
 
       return label;
@@ -3320,6 +3337,14 @@
       }
       this.props.majorCharHeight = this.dom.measureCharMajor.clientHeight;
       this.props.majorCharWidth = this.dom.measureCharMajor.clientWidth;
+    }
+
+    /**
+     * set date
+     * @param {Date} date
+     */
+    setDate(date) {
+      this.date = date;
     }
   }
 

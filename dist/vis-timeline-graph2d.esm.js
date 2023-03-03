@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-03T10:12:40.479Z
+ * @date    2023-03-03T10:26:24.422Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -28673,7 +28673,11 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
 
     _this.prevText = ''; // ajust border height
 
-    _this.minorLineHightOffset = 3;
+    _this.minorLineHightOffset = 3; // 実行日付
+
+    _this.date; // 現在時刻範囲
+
+    _this.isStarted = false;
     return _this;
   }
   /**
@@ -28869,7 +28873,9 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       var xFirstMajorLabel = undefined;
       var count = 0;
       var MAX = 1000;
-      var className;
+      var className; // TODO 仮設定(日付を受け取るようにすること)
+
+      var date = new Date();
       step.start();
       next = step.getCurrent();
       xNext = this.body.util.toScreen(next);
@@ -28906,7 +28912,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
         }
 
         if (this.options.showMiddleLabels && showMiddleGrid) {
-          label = this._repaintMiddleText(x, step.getLabelMiddle(current), orientation, className);
+          label = this._repaintMiddleText(x, step.getLabelMiddle(current), orientation, className, date);
           label.style.width = "".concat(width, "px"); // set width to prevent overflow
         }
 
@@ -29006,13 +29012,16 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
      * @param {string} text
      * @param {string} orientation   "top" or "bottom" (default)
      * @param {string} className
+     * @param {Date} date 
      * @return {Element} Returns the HTML element of the created label
      * @private
      */
 
   }, {
     key: "_repaintMiddleText",
-    value: function _repaintMiddleText(x, text, orientation, className) {
+    value: function _repaintMiddleText(x, text, orientation, className, date) {
+      var _context, _context2;
+
       // reuse redundant label
       var label = this.dom.redundant.middleTexts.shift();
 
@@ -29038,7 +29047,18 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
 
       this._setXY(label, x, y);
 
-      label.className = "vis-text vis-middle ".concat(className); //label.title = title;  // TODO: this is a heavy operation
+      if (!this.isStarted && slice(_context = '0' + date.getHours()).call(_context, -2) == text) {
+        this.isStarted = true;
+      } else if (this.isStarted && slice(_context2 = '0' + date.getHours()).call(_context2, -2) != text) {
+        this.isStarted = false;
+      }
+
+      if (this.isStarted) {
+        label.className = "vis-text vis-middle vis-ontime ".concat(className);
+      } else {
+        label.className = "vis-text vis-middle ".concat(className);
+      } //label.title = title;  // TODO: this is a heavy operation
+
 
       return label;
     }
@@ -29088,11 +29108,11 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
   }, {
     key: "_setXY",
     value: function _setXY(label, x, y) {
-      var _context;
+      var _context3;
 
       // If rtl is true, inverse x.
       var directionX = this.options.rtl ? x * -1 : x;
-      label.style.transform = concat$2(_context = "translate(".concat(directionX, "px, ")).call(_context, y, "px)");
+      label.style.transform = concat$2(_context3 = "translate(".concat(directionX, "px, ")).call(_context3, y, "px)");
     }
     /**
      * Create a minor line for the axis at position x
@@ -29107,7 +29127,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
   }, {
     key: "_repaintMinorLine",
     value: function _repaintMinorLine(left, width, orientation, className) {
-      var _context2;
+      var _context4;
 
       // reuse redundant line
       var line = this.dom.redundant.lines.shift();
@@ -29136,7 +29156,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
 
       this._setXY(line, x, y);
 
-      line.className = concat$2(_context2 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-minor ")).call(_context2, className);
+      line.className = concat$2(_context4 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-minor ")).call(_context4, className);
       return line;
     }
     /**
@@ -29152,7 +29172,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
   }, {
     key: "_repaintMiddleLine",
     value: function _repaintMiddleLine(left, width, orientation, className) {
-      var _context3;
+      var _context5;
 
       // reuse redundant line
       var line = this.dom.redundant.lines.shift();
@@ -29178,7 +29198,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
 
       this._setXY(line, x, y);
 
-      line.className = concat$2(_context3 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-middle ")).call(_context3, className);
+      line.className = concat$2(_context5 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-middle ")).call(_context5, className);
       return line;
     }
     /**
@@ -29194,7 +29214,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
   }, {
     key: "_repaintMajorLine",
     value: function _repaintMajorLine(left, width, orientation, className) {
-      var _context4;
+      var _context6;
 
       // reuse redundant line
       var line = this.dom.redundant.lines.shift();
@@ -29216,7 +29236,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
 
       this._setXY(line, x, y);
 
-      line.className = concat$2(_context4 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-major ")).call(_context4, className);
+      line.className = concat$2(_context6 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-major ")).call(_context6, className);
       return line;
     }
     /**
@@ -29263,6 +29283,16 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
 
       this.props.majorCharHeight = this.dom.measureCharMajor.clientHeight;
       this.props.majorCharWidth = this.dom.measureCharMajor.clientWidth;
+    }
+    /**
+     * set date
+     * @param {Date} date
+     */
+
+  }, {
+    key: "setDate",
+    value: function setDate(date) {
+      this.date = date;
     }
   }]);
 
