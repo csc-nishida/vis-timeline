@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-03T04:51:45.711Z
+ * @date    2023-03-03T05:06:25.897Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -32710,7 +32710,7 @@ var Group = /*#__PURE__*/function () {
         groupId = this.groupId;
       }
 
-      foreground.className = 'vis-group' + ' ' + groupId;
+      foreground.className = 'vis-group' + ' group' + groupId;
       foreground['vis-group'] = this;
       this.dom.foreground = foreground;
       this.dom.background = document.createElement('div');
