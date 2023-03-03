@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-03T05:06:25.897Z
+ * @date    2023-03-03T05:49:16.573Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -32700,7 +32700,10 @@ var Group = /*#__PURE__*/function () {
       inner.className = 'vis-inner';
       label.appendChild(inner);
       this.dom.inner = inner;
-      var foreground = document.createElement('div'); // グループIDを追加
+      var foreground = document.createElement('div');
+      foreground.className = 'vis-group';
+      foreground['vis-group'] = this;
+      this.dom.foreground = foreground; // グループIDを追加
 
       var groupId;
 
@@ -32710,11 +32713,8 @@ var Group = /*#__PURE__*/function () {
         groupId = this.groupId;
       }
 
-      foreground.className = 'vis-group' + ' group' + groupId;
-      foreground['vis-group'] = this;
-      this.dom.foreground = foreground;
       this.dom.background = document.createElement('div');
-      this.dom.background.className = 'vis-group';
+      this.dom.background.className = 'vis-group' + ' group' + groupId;
       this.dom.axis = document.createElement('div');
       this.dom.axis.className = 'vis-group'; // create a hidden marker to detect when the Timelines container is attached
       // to the DOM, or the style of a parent of the Timeline is changed from
