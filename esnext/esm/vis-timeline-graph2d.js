@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-03T10:25:39.340Z
+ * @date    2023-03-06T00:29:10.200Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -3089,6 +3089,10 @@ class TimeAxis extends Component {
     let y = (orientation == 'top') ? this.props.majorLabelHeight : 0;
     this._setXY(label, x, y);
 
+    console.log('middleLabel: ' + text);
+    console.log('現在時間: ' + '0' + date.getHours()).slice(-2);
+    console.log('isStarted: ' + this.isStarted);
+
     if (!this.isStarted && ('0' + date.getHours()).slice(-2) == text) {
       this.isStarted = true;
     } else if (this.isStarted && ('0' + date.getHours()).slice(-2) != text) {
@@ -3097,8 +3101,11 @@ class TimeAxis extends Component {
     if (this.isStarted) {
       label.className = `vis-text vis-middle vis-ontime ${className}`;
     }  else {
-      label.className = `vis-text vis-middle ${className}`;
+      label.className = `vis-text vis-middle vis-notontime ${className}`;
     }
+
+    console.log('className: ' + label.className);
+
     //label.title = title;  // TODO: this is a heavy operation
 
     return label;

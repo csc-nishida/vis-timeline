@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-03T10:25:39.340Z
+ * @date    2023-03-06T00:29:10.200Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18850,7 +18850,7 @@
 	  }, {
 	    key: "_repaintMiddleText",
 	    value: function _repaintMiddleText(x, text, orientation, className, date) {
-	      var _context, _context2;
+	      var _context, _context2, _context3;
 
 	      // reuse redundant label
 	      var label = this.dom.redundant.middleTexts.shift();
@@ -18877,18 +18877,25 @@
 
 	      this._setXY(label, x, y);
 
-	      if (!this.isStarted && _sliceInstanceProperty(_context = '0' + date.getHours()).call(_context, -2) == text) {
+	      console.log('middleLabel: ' + text);
+
+	      _sliceInstanceProperty(_context = console.log('現在時間: ' + '0' + date.getHours())).call(_context, -2);
+
+	      console.log('isStarted: ' + this.isStarted);
+
+	      if (!this.isStarted && _sliceInstanceProperty(_context2 = '0' + date.getHours()).call(_context2, -2) == text) {
 	        this.isStarted = true;
-	      } else if (this.isStarted && _sliceInstanceProperty(_context2 = '0' + date.getHours()).call(_context2, -2) != text) {
+	      } else if (this.isStarted && _sliceInstanceProperty(_context3 = '0' + date.getHours()).call(_context3, -2) != text) {
 	        this.isStarted = false;
 	      }
 
 	      if (this.isStarted) {
 	        label.className = "vis-text vis-middle vis-ontime ".concat(className);
 	      } else {
-	        label.className = "vis-text vis-middle ".concat(className);
-	      } //label.title = title;  // TODO: this is a heavy operation
+	        label.className = "vis-text vis-middle vis-notontime ".concat(className);
+	      }
 
+	      console.log('className: ' + label.className); //label.title = title;  // TODO: this is a heavy operation
 
 	      return label;
 	    }
@@ -18938,11 +18945,11 @@
 	  }, {
 	    key: "_setXY",
 	    value: function _setXY(label, x, y) {
-	      var _context3;
+	      var _context4;
 
 	      // If rtl is true, inverse x.
 	      var directionX = this.options.rtl ? x * -1 : x;
-	      label.style.transform = _concatInstanceProperty(_context3 = "translate(".concat(directionX, "px, ")).call(_context3, y, "px)");
+	      label.style.transform = _concatInstanceProperty(_context4 = "translate(".concat(directionX, "px, ")).call(_context4, y, "px)");
 	    }
 	    /**
 	     * Create a minor line for the axis at position x
@@ -18957,7 +18964,7 @@
 	  }, {
 	    key: "_repaintMinorLine",
 	    value: function _repaintMinorLine(left, width, orientation, className) {
-	      var _context4;
+	      var _context5;
 
 	      // reuse redundant line
 	      var line = this.dom.redundant.lines.shift();
@@ -18986,7 +18993,7 @@
 
 	      this._setXY(line, x, y);
 
-	      line.className = _concatInstanceProperty(_context4 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-minor ")).call(_context4, className);
+	      line.className = _concatInstanceProperty(_context5 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-minor ")).call(_context5, className);
 	      return line;
 	    }
 	    /**
@@ -19002,7 +19009,7 @@
 	  }, {
 	    key: "_repaintMiddleLine",
 	    value: function _repaintMiddleLine(left, width, orientation, className) {
-	      var _context5;
+	      var _context6;
 
 	      // reuse redundant line
 	      var line = this.dom.redundant.lines.shift();
@@ -19028,7 +19035,7 @@
 
 	      this._setXY(line, x, y);
 
-	      line.className = _concatInstanceProperty(_context5 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-middle ")).call(_context5, className);
+	      line.className = _concatInstanceProperty(_context6 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-middle ")).call(_context6, className);
 	      return line;
 	    }
 	    /**
@@ -19044,7 +19051,7 @@
 	  }, {
 	    key: "_repaintMajorLine",
 	    value: function _repaintMajorLine(left, width, orientation, className) {
-	      var _context6;
+	      var _context7;
 
 	      // reuse redundant line
 	      var line = this.dom.redundant.lines.shift();
@@ -19066,7 +19073,7 @@
 
 	      this._setXY(line, x, y);
 
-	      line.className = _concatInstanceProperty(_context6 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-major ")).call(_context6, className);
+	      line.className = _concatInstanceProperty(_context7 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-major ")).call(_context7, className);
 	      return line;
 	    }
 	    /**
