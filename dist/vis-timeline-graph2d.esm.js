@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-06T00:30:04.700Z
+ * @date    2023-03-06T00:41:53.847Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -29048,9 +29048,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       this._setXY(label, x, y);
 
       console.log('middleLabel: ' + text);
-
-      slice(_context = console.log('現在時間: ' + '0' + date.getHours())).call(_context, -2);
-
+      console.log('現在時間: ' + slice(_context = '0' + date.getHours()).call(_context, -2));
       console.log('isStarted: ' + this.isStarted);
 
       if (!this.isStarted && slice(_context2 = '0' + date.getHours()).call(_context2, -2) == text) {
