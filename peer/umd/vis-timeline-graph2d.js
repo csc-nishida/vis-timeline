@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-06T01:48:24.267Z
+ * @date    2023-03-06T08:51:13.777Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18620,13 +18620,13 @@
 	      props.majorLineHeight = props.minorLineHeight + props.majorLabelHeight;
 	      props.majorLineWidth = 1; // TODO: really calculate width
 	      // debug
-
-	      console.log('body.domProps.root.height:' + this.body.domProps.root.height);
-	      console.log('body.domProps.top.height:' + this.body.domProps.top.height);
-	      console.log('body.domProps.bottom.height:' + this.body.domProps.bottom.height);
-	      console.log('props.minorLineHeight:' + props.minorLineHeight);
-	      console.log('props.middleLineHeight:' + props.middleLineHeight);
-	      console.log('props.majorLineHeight:' + props.majorLineHeight); //  take foreground and background offline while updating (is almost twice as fast)
+	      // console.log('body.domProps.root.height:' + this.body.domProps.root.height);
+	      // console.log('body.domProps.top.height:' + this.body.domProps.top.height);
+	      // console.log('body.domProps.bottom.height:' + this.body.domProps.bottom.height);
+	      // console.log('props.minorLineHeight:' + props.minorLineHeight);
+	      // console.log('props.middleLineHeight:' + props.middleLineHeight);
+	      // console.log('props.majorLineHeight:' + props.majorLineHeight);
+	      //  take foreground and background offline while updating (is almost twice as fast)
 
 	      var foregroundNextSibling = foreground.nextSibling;
 	      var backgroundNextSibling = background.nextSibling;
@@ -18850,7 +18850,7 @@
 	  }, {
 	    key: "_repaintMiddleText",
 	    value: function _repaintMiddleText(x, text, orientation, className, date) {
-	      var _context, _context2, _context3;
+	      var _context, _context2;
 
 	      // reuse redundant label
 	      var label = this.dom.redundant.middleTexts.shift();
@@ -18872,18 +18872,18 @@
 	        label.innerHTML = availableUtils.xss('　');
 	      }
 
-	      this.prevText = text;
-	      var y = orientation == 'top' ? this.props.majorLabelHeight : 0;
+	      this.prevText = text; // subtract offset of middleLabel 
 
-	      this._setXY(label, x, y);
+	      var y = orientation == 'top' ? this.props.majorLabelHeight - 5 : 0;
 
-	      console.log('middleLabel: ' + text);
-	      console.log('現在時間: ' + _sliceInstanceProperty(_context = '0' + date.getHours()).call(_context, -2));
-	      console.log('isStarted: ' + this.isStarted);
+	      this._setXY(label, x, y); // console.log('middleLabel: ' + text);
+	      // console.log('現在時間: ' + ('0' + date.getHours()).slice(-2));
+	      // console.log('isStarted: ' + this.isStarted);
 
-	      if (!this.isStarted && _sliceInstanceProperty(_context2 = '0' + date.getHours()).call(_context2, -2) == text) {
+
+	      if (!this.isStarted && _sliceInstanceProperty(_context = '0' + date.getHours()).call(_context, -2) == text) {
 	        this.isStarted = true;
-	      } else if (this.isStarted && _sliceInstanceProperty(_context3 = '0' + date.getHours()).call(_context3, -2) != text) {
+	      } else if (this.isStarted && _sliceInstanceProperty(_context2 = '0' + date.getHours()).call(_context2, -2) != text) {
 	        this.isStarted = false;
 	      }
 
@@ -18891,9 +18891,9 @@
 	        label.className = "vis-text vis-middle vis-ontime ".concat(className);
 	      } else {
 	        label.className = "vis-text vis-middle vis-notontime ".concat(className);
-	      }
+	      } // console.log('className: ' + label.className);
+	      //label.title = title;  // TODO: this is a heavy operation
 
-	      console.log('className: ' + label.className); //label.title = title;  // TODO: this is a heavy operation
 
 	      return label;
 	    }
@@ -18924,8 +18924,7 @@
 	      label.childNodes[0].innerHTML = availableUtils.xss(text);
 	      label.className = "vis-text vis-major ".concat(className); //label.title = title; // TODO: this is a heavy operation
 
-	      var y = orientation == 'top' ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight;
-	      console.log('');
+	      var y = orientation == 'top' ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight; // console.log('')
 
 	      this._setXY(label, x, y);
 
@@ -18943,11 +18942,11 @@
 	  }, {
 	    key: "_setXY",
 	    value: function _setXY(label, x, y) {
-	      var _context4;
+	      var _context3;
 
 	      // If rtl is true, inverse x.
 	      var directionX = this.options.rtl ? x * -1 : x;
-	      label.style.transform = _concatInstanceProperty(_context4 = "translate(".concat(directionX, "px, ")).call(_context4, y, "px)");
+	      label.style.transform = _concatInstanceProperty(_context3 = "translate(".concat(directionX, "px, ")).call(_context3, y, "px)");
 	    }
 	    /**
 	     * Create a minor line for the axis at position x
@@ -18962,7 +18961,7 @@
 	  }, {
 	    key: "_repaintMinorLine",
 	    value: function _repaintMinorLine(left, width, orientation, className) {
-	      var _context5;
+	      var _context4;
 
 	      // reuse redundant line
 	      var line = this.dom.redundant.lines.shift();
@@ -18982,16 +18981,15 @@
 	      // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: 
 
 	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset;
-	      var x = left - props.minorLineWidth / 2;
-	      console.log('minor_orientation: ' + orientation);
-	      console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
-	      console.log('props.middleLabelHeight: ' + props.middleLabelHeight);
-	      console.log('props.minorLabelHeight: ' + props.minorLabelHeight);
-	      console.log('minor_Y: ' + y);
+	      var x = left - props.minorLineWidth / 2; // console.log('minor_orientation: ' + orientation);
+	      // console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
+	      // console.log('props.middleLabelHeight: ' + props.middleLabelHeight);
+	      // console.log('props.minorLabelHeight: ' + props.minorLabelHeight);
+	      // console.log('minor_Y: ' + y);
 
 	      this._setXY(line, x, y);
 
-	      line.className = _concatInstanceProperty(_context5 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-minor ")).call(_context5, className);
+	      line.className = _concatInstanceProperty(_context4 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-minor ")).call(_context4, className);
 	      return line;
 	    }
 	    /**
@@ -19007,7 +19005,7 @@
 	  }, {
 	    key: "_repaintMiddleLine",
 	    value: function _repaintMiddleLine(left, width, orientation, className) {
-	      var _context6;
+	      var _context5;
 
 	      // reuse redundant line
 	      var line = this.dom.redundant.lines.shift();
@@ -19025,15 +19023,14 @@
 	      // let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
 
 	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
-	      var x = left - props.middleLineWidth / 2;
-	      console.log('middle_orientation: ' + orientation);
-	      console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
-	      console.log('body.domProps.top.height: ' + this.body.domProps.top.height);
-	      console.log('middle_Y: ' + y);
+	      var x = left - props.middleLineWidth / 2; // console.log('middle_orientation: ' + orientation);
+	      // console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
+	      // console.log('body.domProps.top.height: ' + this.body.domProps.top.height);
+	      // console.log('middle_Y: ' + y);
 
 	      this._setXY(line, x, y);
 
-	      line.className = _concatInstanceProperty(_context6 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-middle ")).call(_context6, className);
+	      line.className = _concatInstanceProperty(_context5 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-middle ")).call(_context5, className);
 	      return line;
 	    }
 	    /**
@@ -19049,7 +19046,7 @@
 	  }, {
 	    key: "_repaintMajorLine",
 	    value: function _repaintMajorLine(left, width, orientation, className) {
-	      var _context7;
+	      var _context6;
 
 	      // reuse redundant line
 	      var line = this.dom.redundant.lines.shift();
@@ -19065,13 +19062,12 @@
 	      line.style.width = "".concat(width, "px");
 	      line.style.height = "".concat(props.majorLineHeight, "px");
 	      var y = orientation == 'top' ? 0 : this.body.domProps.top.height;
-	      var x = left - props.majorLineWidth / 2;
-	      console.log('major_orientation: ' + orientation);
-	      console.log('major_Y: ' + y);
+	      var x = left - props.majorLineWidth / 2; // console.log('major_orientation: ' + orientation);
+	      // console.log('major_Y: ' + y);
 
 	      this._setXY(line, x, y);
 
-	      line.className = _concatInstanceProperty(_context7 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-major ")).call(_context7, className);
+	      line.className = _concatInstanceProperty(_context6 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-major ")).call(_context6, className);
 	      return line;
 	    }
 	    /**

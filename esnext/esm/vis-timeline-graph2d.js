@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-06T01:48:24.267Z
+ * @date    2023-03-06T08:51:13.777Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -2843,12 +2843,12 @@ class TimeAxis extends Component {
     props.majorLineWidth = 1; // TODO: really calculate width
 
     // debug
-    console.log('body.domProps.root.height:' + this.body.domProps.root.height);
-    console.log('body.domProps.top.height:' + this.body.domProps.top.height);
-    console.log('body.domProps.bottom.height:' + this.body.domProps.bottom.height);
-    console.log('props.minorLineHeight:' + props.minorLineHeight);
-    console.log('props.middleLineHeight:' + props.middleLineHeight);
-    console.log('props.majorLineHeight:' + props.majorLineHeight);
+    // console.log('body.domProps.root.height:' + this.body.domProps.root.height);
+    // console.log('body.domProps.top.height:' + this.body.domProps.top.height);
+    // console.log('body.domProps.bottom.height:' + this.body.domProps.bottom.height);
+    // console.log('props.minorLineHeight:' + props.minorLineHeight);
+    // console.log('props.middleLineHeight:' + props.middleLineHeight);
+    // console.log('props.majorLineHeight:' + props.majorLineHeight);
 
     //  take foreground and background offline while updating (is almost twice as fast)
     const foregroundNextSibling = foreground.nextSibling;
@@ -3085,13 +3085,13 @@ class TimeAxis extends Component {
       label.innerHTML = availableUtils.xss('　');
     }
     this.prevText = text;
-    
-    let y = (orientation == 'top') ? this.props.majorLabelHeight : 0;
+    // subtract offset of middleLabel 
+    let y = (orientation == 'top') ? this.props.majorLabelHeight - 5 : 0;
     this._setXY(label, x, y);
 
-    console.log('middleLabel: ' + text);
-    console.log('現在時間: ' + ('0' + date.getHours()).slice(-2));
-    console.log('isStarted: ' + this.isStarted);
+    // console.log('middleLabel: ' + text);
+    // console.log('現在時間: ' + ('0' + date.getHours()).slice(-2));
+    // console.log('isStarted: ' + this.isStarted);
 
     if (!this.isStarted && ('0' + date.getHours()).slice(-2) == text) {
       this.isStarted = true;
@@ -3104,7 +3104,7 @@ class TimeAxis extends Component {
       label.className = `vis-text vis-middle vis-notontime ${className}`;
     }
 
-    console.log('className: ' + label.className);
+    // console.log('className: ' + label.className);
 
     //label.title = title;  // TODO: this is a heavy operation
 
@@ -3137,7 +3137,7 @@ class TimeAxis extends Component {
     //label.title = title; // TODO: this is a heavy operation
 
     let y = (orientation == 'top') ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight;
-    console.log('');
+    // console.log('')
     this._setXY(label, x, y);
 
     this.dom.majorTexts.push(label);
@@ -3189,11 +3189,11 @@ class TimeAxis extends Component {
       this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset;
     let x = left - props.minorLineWidth / 2;
 
-    console.log('minor_orientation: ' + orientation);
-    console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
-    console.log('props.middleLabelHeight: ' + props.middleLabelHeight);
-    console.log('props.minorLabelHeight: ' + props.minorLabelHeight);
-    console.log('minor_Y: ' + y);
+    // console.log('minor_orientation: ' + orientation);
+    // console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
+    // console.log('props.middleLabelHeight: ' + props.middleLabelHeight);
+    // console.log('props.minorLabelHeight: ' + props.minorLabelHeight);
+    // console.log('minor_Y: ' + y);
 
     this._setXY(line, x, y);
     line.className = `vis-grid ${this.options.rtl ?  'vis-vertical-rtl' : 'vis-vertical'} vis-minor ${className}`;
@@ -3231,10 +3231,10 @@ class TimeAxis extends Component {
       this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
     let x = left - props.middleLineWidth / 2;
 
-    console.log('middle_orientation: ' + orientation);
-    console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
-    console.log('body.domProps.top.height: ' + this.body.domProps.top.height);
-    console.log('middle_Y: ' + y);
+    // console.log('middle_orientation: ' + orientation);
+    // console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
+    // console.log('body.domProps.top.height: ' + this.body.domProps.top.height);
+    // console.log('middle_Y: ' + y);
 
     this._setXY(line, x, y);
     line.className = `vis-grid ${this.options.rtl ?  'vis-vertical-rtl' : 'vis-vertical'} vis-middle ${className}`;
@@ -3269,8 +3269,8 @@ class TimeAxis extends Component {
     let y = (orientation == 'top') ? 0 : this.body.domProps.top.height;
     let x = left - props.majorLineWidth / 2;
 
-    console.log('major_orientation: ' + orientation);
-    console.log('major_Y: ' + y);
+    // console.log('major_orientation: ' + orientation);
+    // console.log('major_Y: ' + y);
 
     this._setXY(line, x, y);
     line.className = `vis-grid ${this.options.rtl ?  'vis-vertical-rtl' : 'vis-vertical'} vis-major ${className}`;
