@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-06T09:05:18.478Z
+ * @date    2023-03-06T09:15:58.693Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -29045,7 +29045,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       }
 
       this.prevText = text;
-      var y = orientation == 'top' ? this.props.majorLabelHeight : 0;
+      var y = orientation == 'top' ? this.props.majorLabelHeight - 2 : 0;
 
       this._setXY(label, x, y);
 
