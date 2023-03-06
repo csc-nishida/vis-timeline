@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-06T01:41:06.529Z
+ * @date    2023-03-06T01:48:24.267Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -2739,8 +2739,7 @@
       // display setting for middleLabel
       this.prevText = '';
       // ajust border height
-      // this.minorLineHightOffset = 3;
-      this.minorLineHightOffset = 5;
+      this.minorLineHightOffset = 3;
       // 実行日付
       this.date;
       // 現在時刻範囲
