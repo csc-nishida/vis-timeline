@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-06T09:25:19.342Z
+ * @date    2023-03-06T09:35:03.341Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18822,7 +18822,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
 
       this.dom.minorTexts.push(label);
       label.innerHTML = availableUtils.xss(text);
-      var y = orientation == 'top' ? this.props.majorLabelHeight + this.props.middleLabelHeight + 3 : 0;
+      var y = orientation == 'top' ? this.props.majorLabelHeight + this.props.middleLabelHeight : 0;
 
       this._setXY(label, x, y);
 
@@ -18869,7 +18869,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       }
 
       this.prevText = text;
-      var y = orientation == 'top' ? this.props.majorLabelHeight : 0;
+      var y = orientation == 'top' ? this.props.majorLabelHeight + 3 : 0;
 
       this._setXY(label, x, y);
 
@@ -18921,7 +18921,7 @@ var TimeAxis = /*#__PURE__*/function (_Component) {
       label.childNodes[0].innerHTML = availableUtils.xss(text);
       label.className = "vis-text vis-major ".concat(className); //label.title = title; // TODO: this is a heavy operation
 
-      var y = orientation == 'top' ? 0 + 3 : this.props.minorLabelHeight + this.props.middleLabelHeight; // console.log('')
+      var y = orientation == 'top' ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight; // console.log('')
 
       this._setXY(label, x, y);
 
