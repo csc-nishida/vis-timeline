@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-07T04:57:06.467Z
+ * @date    2023-03-07T05:14:08.055Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18608,24 +18608,14 @@
 	      props.majorLabelHeight = showMajorLabels ? props.majorCharHeight : 0;
 	      props.height = props.minorLabelHeight + props.middleCharHeight + props.majorLabelHeight;
 	      props.width = foreground.offsetWidth;
-	      props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - ( // props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - props.minorLabelHeight -
-	      this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
+	      props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
 	      props.minorLineWidth = 1; // TODO: really calculate width
 
-	      props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - ( // props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - props.minorLabelHeight -
-	      this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height); // props.middleLineHeight = props.minorLineHeight + props.middleLineHeight;
-
+	      props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
 	      props.middleLineWidth = 1; // TODO: really calculate width
 
 	      props.majorLineHeight = props.minorLineHeight + props.majorLabelHeight;
 	      props.majorLineWidth = 1; // TODO: really calculate width
-	      // debug
-	      // console.log('body.domProps.root.height:' + this.body.domProps.root.height);
-	      // console.log('body.domProps.top.height:' + this.body.domProps.top.height);
-	      // console.log('body.domProps.bottom.height:' + this.body.domProps.bottom.height);
-	      // console.log('props.minorLineHeight:' + props.minorLineHeight);
-	      // console.log('props.middleLineHeight:' + props.middleLineHeight);
-	      // console.log('props.majorLineHeight:' + props.majorLineHeight);
 	      //  take foreground and background offline while updating (is almost twice as fast)
 
 	      var foregroundNextSibling = foreground.nextSibling;
@@ -18832,10 +18822,6 @@
 
 	      this._setXY(label, x, y);
 
-	      console.log('minor_orientation:' + orientation);
-	      console.log('minor_y:' + y);
-	      console.log('this.props.majorLabelHeight:' + this.props.majorLabelHeight);
-	      console.log('this.props.middleLabelHeight:' + this.props.middleLabelHeight);
 	      label.className = "vis-text vis-minor ".concat(className); //label.title = title;  // TODO: this is a heavy operation
 
 	      return label;
@@ -18867,8 +18853,7 @@
 	        this.dom.foreground.appendChild(label);
 	      }
 
-	      this.dom.middleTexts.push(label); // for debug
-	      //console.log('this.dom.middleTexts:' + this.dom.middleTexts);
+	      this.dom.middleTexts.push(label);
 
 	      if (text != this.prevText) {
 	        label.innerHTML = availableUtils.xss(text);
@@ -18881,12 +18866,6 @@
 
 	      this._setXY(label, x, y);
 
-	      console.log('middle_orientation:' + orientation);
-	      console.log('middle_y:' + y);
-	      console.log('this.props.majorLabelHeight:' + this.props.majorLabelHeight); // console.log('middleLabel: ' + text);
-	      // console.log('現在時間: ' + ('0' + date.getHours()).slice(-2));
-	      // console.log('isStarted: ' + this.isStarted);
-
 	      if (!this.isStarted && _sliceInstanceProperty(_context = '0' + date.getHours()).call(_context, -2) == text) {
 	        this.isStarted = true;
 	      } else if (this.isStarted && _sliceInstanceProperty(_context2 = '0' + date.getHours()).call(_context2, -2) != text) {
@@ -18897,8 +18876,7 @@
 	        label.className = "vis-text vis-middle vis-ontime ".concat(className);
 	      } else {
 	        label.className = "vis-text vis-middle vis-notontime ".concat(className);
-	      } // console.log('className: ' + label.className);
-	      //label.title = title;  // TODO: this is a heavy operation
+	      } //label.title = title;  // TODO: this is a heavy operation
 
 
 	      return label;
@@ -18930,14 +18908,10 @@
 	      label.childNodes[0].innerHTML = availableUtils.xss(text);
 	      label.className = "vis-text vis-major ".concat(className); //label.title = title; // TODO: this is a heavy operation
 
-	      var y = orientation == 'top' ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight; // console.log('')
+	      var y = orientation == 'top' ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight;
 
 	      this._setXY(label, x, y);
 
-	      console.log('major_orientation:' + orientation);
-	      console.log('major_y:' + y);
-	      console.log('this.props.minorLabelHeight:' + this.props.minorLabelHeight);
-	      console.log('this.props.middleLabelHeight:' + this.props.middleLabelHeight);
 	      this.dom.majorTexts.push(label);
 	      return label;
 	    }
@@ -18985,17 +18959,9 @@
 	      this.dom.lines.push(line);
 	      var props = this.props;
 	      line.style.width = "".concat(width, "px");
-	      line.style.height = "".concat(props.minorLineHeight, "px"); // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight : this.body.domProps.top.height;
-	      // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: 
-	      // offsetを加算(どうなる？)
-	      // let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight: 
-
+	      line.style.height = "".concat(props.minorLineHeight, "px");
 	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset;
-	      var x = left - props.minorLineWidth / 2; // console.log('minor_orientation: ' + orientation);
-	      // console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
-	      // console.log('props.middleLabelHeight: ' + props.middleLabelHeight);
-	      // console.log('props.minorLabelHeight: ' + props.minorLabelHeight);
-	      // console.log('minor_Y: ' + y);
+	      var x = left - props.minorLineWidth / 2;
 
 	      this._setXY(line, x, y);
 
@@ -19029,14 +18995,9 @@
 	      this.dom.lines.push(line);
 	      var props = this.props;
 	      line.style.width = "".concat(width, "px");
-	      line.style.height = "".concat(props.middleLineHeight, "px"); // let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height;
-	      // let y = (orientation == 'top') ? props.majorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
-
+	      line.style.height = "".concat(props.middleLineHeight, "px");
 	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
-	      var x = left - props.middleLineWidth / 2; // console.log('middle_orientation: ' + orientation);
-	      // console.log('props.majorLabelHeight: ' + props.majorLabelHeight);
-	      // console.log('body.domProps.top.height: ' + this.body.domProps.top.height);
-	      // console.log('middle_Y: ' + y);
+	      var x = left - props.middleLineWidth / 2;
 
 	      this._setXY(line, x, y);
 
@@ -19072,8 +19033,7 @@
 	      line.style.width = "".concat(width, "px");
 	      line.style.height = "".concat(props.majorLineHeight, "px");
 	      var y = orientation == 'top' ? 0 : this.body.domProps.top.height;
-	      var x = left - props.majorLineWidth / 2; // console.log('major_orientation: ' + orientation);
-	      // console.log('major_Y: ' + y);
+	      var x = left - props.majorLineWidth / 2;
 
 	      this._setXY(line, x, y);
 
