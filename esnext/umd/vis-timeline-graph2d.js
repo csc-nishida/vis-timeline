@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-07T02:50:58.480Z
+ * @date    2023-03-07T03:03:10.834Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -3111,7 +3111,7 @@
         label.innerHTML = availableUtils.xss('　');
       }
       this.prevText = text;
-      let y = (orientation == 'top') ? this.props.majorLabelHeight  - 5: 0;
+      let y = (orientation == 'top') ? this.props.majorLabelHeight  + 5: 0;
       // let y = (orientation == 'top') ? this.props.middleLabelHeight : 0;
       
       // 固定値設定
@@ -3169,7 +3169,7 @@
       label.className = `vis-text vis-major ${className}`;
       //label.title = title; // TODO: this is a heavy operation
 
-      let y = (orientation == 'top') ? 0 - 2 : this.props.minorLabelHeight + this.props.middleLabelHeight;
+      let y = (orientation == 'top') ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight;
       // console.log('')
       this._setXY(label, x, y);
 
