@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-07T05:14:08.055Z
+ * @date    2023-03-07T05:30:14.993Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -3071,7 +3071,7 @@ class TimeAxis extends Component {
       label.innerHTML = availableUtils.xss('　');
     }
     this.prevText = text;
-    let y = (orientation == 'top') ? this.props.majorLabelHeight: 0;
+    let y = (orientation == 'top') ? this.props.majorLabelHeight -1: 0;
     
     this._setXY(label, x, y);
 
@@ -6185,10 +6185,6 @@ class Group {
       availableUtils.addClassName(this.dom.label, 'vis-nested-group');
       if (data.treeLevel) {
         availableUtils.addClassName(this.dom.label, 'vis-group-level-' + data.treeLevel);
-        // this.dom.label.addEventListener('click', () => {
-        //   console.log('クリックイベント追加')
-        //   util.addClassName(this.dom.label, 'vis-control-selected');
-        // })
       } else {
         // Nesting level is unknown, but we're sure it's at least 1
         availableUtils.addClassName(this.dom.label, 'vis-group-level-unknown-but-gte1');
