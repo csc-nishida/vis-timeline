@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-06T10:04:56.138Z
+ * @date    2023-03-07T01:20:29.843Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -30584,10 +30584,12 @@
 	      label.innerHTML = availableUtils.xss(text);
 	      var y = orientation == 'top' ? this.props.majorLabelHeight + this.props.middleLabelHeight : 0;
 
-	      this._setXY(label, x, y); // console.log('minor_orientation:' + orientation);
-	      // console.log('minor_y:' + y);
+	      this._setXY(label, x, y);
 
-
+	      console.log('minor_orientation:' + orientation);
+	      console.log('minor_y:' + y);
+	      console.log('this.props.majorLabelHeight:' + this.props.majorLabelHeight);
+	      console.log('this.props.middleLabelHeight:' + this.props.middleLabelHeight);
 	      label.className = "vis-text vis-minor ".concat(className); //label.title = title;  // TODO: this is a heavy operation
 
 	      return label;
@@ -30631,12 +30633,13 @@
 	      this.prevText = text;
 	      var y = orientation == 'top' ? this.props.majorLabelHeight : 0; // let y = (orientation == 'top') ? this.props.middleLabelHeight : 0;
 
-	      this._setXY(label, x, y); // console.log('middle_orientation:' + orientation);
-	      // console.log('middle_y:' + y);
-	      // console.log('middleLabel: ' + text);
+	      this._setXY(label, x, y);
+
+	      console.log('middle_orientation:' + orientation);
+	      console.log('middle_y:' + y);
+	      console.log('this.props.majorLabelHeight:' + this.props.majorLabelHeight); // console.log('middleLabel: ' + text);
 	      // console.log('現在時間: ' + ('0' + date.getHours()).slice(-2));
 	      // console.log('isStarted: ' + this.isStarted);
-
 
 	      if (!this.isStarted && _sliceInstanceProperty(_context = '0' + date.getHours()).call(_context, -2) == text) {
 	        this.isStarted = true;
@@ -30683,10 +30686,12 @@
 
 	      var y = orientation == 'top' ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight; // console.log('')
 
-	      this._setXY(label, x, y); // console.log('major_orientation:' + orientation);
-	      // console.log('major_y:' + y);
+	      this._setXY(label, x, y);
 
-
+	      console.log('major_orientation:' + orientation);
+	      console.log('major_y:' + y);
+	      console.log('this.props.minorLabelHeight:' + this.props.minorLabelHeight);
+	      console.log('this.props.middleLabelHeight:' + this.props.middleLabelHeight);
 	      this.dom.majorTexts.push(label);
 	      return label;
 	    }
