@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-07T05:30:14.993Z
+ * @date    2024-04-13T01:35:49.231Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -2684,13 +2684,13 @@
 
   /** A horizontal time axis */
   class TimeAxis extends Component {
-  /**
-   * @param {{dom: Object, domProps: Object, emitter: Emitter, range: Range}} body
-   * @param {Object} [options]        See TimeAxis.setOptions for the available
-   *                                  options.
-   * @constructor TimeAxis
-   * @extends Component
-   */
+    /**
+     * @param {{dom: Object, domProps: Object, emitter: Emitter, range: Range}} body
+     * @param {Object} [options]        See TimeAxis.setOptions for the available
+     *                                  options.
+     * @constructor TimeAxis
+     * @extends Component
+     */
     constructor(body, options) {
       super();
       this.dom = {
@@ -2703,22 +2703,22 @@
           lines: [],
           majorTexts: [],
           middleTexts: [],
-          minorTexts: []
-        }
+          minorTexts: [],
+        },
       };
       this.props = {
         range: {
           start: 0,
           end: 0,
-          minimumStep: 0
+          minimumStep: 0,
         },
-        lineTop: 0
+        lineTop: 0,
       };
 
       this.defaultOptions = {
         orientation: {
-          axis: 'bottom'
-        },  // axis orientation: 'top' or 'bottom'
+          axis: "bottom",
+        }, // axis orientation: 'top' or 'bottom'
         showMinorLabels: true,
         showMiddleLabels: true,
         showMajorLabels: true,
@@ -2726,7 +2726,7 @@
         maxMinorChars: 7,
         format: availableUtils.extend({}, TimeStep.FORMAT),
         moment: moment$2,
-        timeAxis: null
+        timeAxis: null,
       };
       this.options = availableUtils.extend({}, this.defaultOptions);
 
@@ -2737,7 +2737,7 @@
 
       this.setOptions(options);
       // display setting for middleLabel
-      this.prevText = '';
+      this.prevText = "";
       // ajust border height
       this.minorLineHightOffset = 3;
       // 実行日付
@@ -2745,7 +2745,6 @@
       // 現在時刻範囲
       this.isStarted = false;
     }
-
 
     /**
      * Set options for the TimeAxis.
@@ -2760,38 +2759,43 @@
     setOptions(options) {
       if (options) {
         // copy all options that we know
-        availableUtils.selectiveExtend([
-          'showMinorLabels',
-          'showMiddleLabels',
-          'showMajorLabels',
-          'showWeekScale',
-          'maxMinorChars',
-          'hiddenDates',
-          'timeAxis',
-          'moment',
-          'rtl'
-        ], this.options, options);
+        availableUtils.selectiveExtend(
+          [
+            "showMinorLabels",
+            "showMiddleLabels",
+            "showMajorLabels",
+            "showWeekScale",
+            "maxMinorChars",
+            "hiddenDates",
+            "timeAxis",
+            "moment",
+            "rtl",
+          ],
+          this.options,
+          options
+        );
 
         // deep copy the format options
-        availableUtils.selectiveDeepExtend(['format'], this.options, options);
+        availableUtils.selectiveDeepExtend(["format"], this.options, options);
 
-        if ('orientation' in options) {
-          if (typeof options.orientation === 'string') {
+        if ("orientation" in options) {
+          if (typeof options.orientation === "string") {
             this.options.orientation.axis = options.orientation;
-          }
-          else if (typeof options.orientation === 'object' && 'axis' in options.orientation) {
+          } else if (
+            typeof options.orientation === "object" &&
+            "axis" in options.orientation
+          ) {
             this.options.orientation.axis = options.orientation.axis;
           }
         }
 
         // apply locale to moment.js
         // TODO: not so nice, this is applied globally to moment.js
-        if ('locale' in options) {
-          if (typeof moment$2.locale === 'function') {
+        if ("locale" in options) {
+          if (typeof moment$2.locale === "function") {
             // moment.js 2.8.1+
             moment$2.locale(options.locale);
-          }
-          else {
+          } else {
             moment$2.lang(options.locale);
           }
         }
@@ -2802,11 +2806,11 @@
      * Create the HTML DOM for the TimeAxis
      */
     _create() {
-      this.dom.foreground = document.createElement('div');
-      this.dom.background = document.createElement('div');
+      this.dom.foreground = document.createElement("div");
+      this.dom.background = document.createElement("div");
 
-      this.dom.foreground.className = 'vis-time-axis vis-foreground';
-      this.dom.background.className = 'vis-time-axis vis-background';
+      this.dom.foreground.className = "vis-time-axis vis-foreground";
+      this.dom.background.className = "vis-time-axis vis-background";
     }
 
     /**
@@ -2834,31 +2838,47 @@
       const background = this.dom.background;
 
       // determine the correct parent DOM element (depending on option orientation)
-      const parent = (this.options.orientation.axis == 'top') ? this.body.dom.top : this.body.dom.bottom;
-      const parentChanged = (foreground.parentNode !== parent);
+      const parent =
+        this.options.orientation.axis == "top"
+          ? this.body.dom.top
+          : this.body.dom.bottom;
+      const parentChanged = foreground.parentNode !== parent;
 
       // calculate character width and height
       this._calculateCharSize();
 
       // TODO: recalculate sizes only needed when parent is resized or options is changed
-      const showMinorLabels = this.options.showMinorLabels && this.options.orientation.axis !== 'none';
-      const showMiddleLabels = this.options.showMiddleLabels && this.options.orientation.axis !== 'none';
-      const showMajorLabels = this.options.showMajorLabels && this.options.orientation.axis !== 'none';
+      const showMinorLabels =
+        this.options.showMinorLabels && this.options.orientation.axis !== "none";
+      const showMiddleLabels =
+        this.options.showMiddleLabels && this.options.orientation.axis !== "none";
+      const showMajorLabels =
+        this.options.showMajorLabels && this.options.orientation.axis !== "none";
 
       // determine the width and height of the elemens for the axis
       props.minorLabelHeight = showMinorLabels ? props.minorCharHeight : 0;
       props.middleLabelHeight = showMiddleLabels ? props.middleCharHeight : 0;
       props.majorLabelHeight = showMajorLabels ? props.majorCharHeight : 0;
-      props.height = props.minorLabelHeight + props.middleCharHeight + props.majorLabelHeight;
+      props.height =
+        props.minorLabelHeight + props.middleCharHeight + props.majorLabelHeight;
       props.width = foreground.offsetWidth;
 
-      props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight -
-          (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
+      props.minorLineHeight =
+        this.body.domProps.root.height -
+        props.majorLabelHeight -
+        props.middleLabelHeight -
+        (this.options.orientation.axis == "top"
+          ? this.body.domProps.bottom.height
+          : this.body.domProps.top.height);
       props.minorLineWidth = 1; // TODO: really calculate width
-      props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight -
-          (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
+      props.middleLineHeight =
+        this.body.domProps.root.height -
+        props.majorLabelHeight -
+        (this.options.orientation.axis == "top"
+          ? this.body.domProps.bottom.height
+          : this.body.domProps.top.height);
       props.middleLineWidth = 1; // TODO: really calculate width
-      props.majorLineHeight = props.minorLineHeight + props.majorLabelHeight;
+      props.majorLineHeight = props.middleLineHeight + props.majorLabelHeight;
       props.majorLineWidth = 1; // TODO: really calculate width
 
       //  take foreground and background offline while updating (is almost twice as fast)
@@ -2874,14 +2894,15 @@
       // put DOM online again (at the same place)
       if (foregroundNextSibling) {
         parent.insertBefore(foreground, foregroundNextSibling);
-      }
-      else {
+      } else {
         parent.appendChild(foreground);
       }
       if (backgroundNextSibling) {
-        this.body.dom.backgroundVertical.insertBefore(background, backgroundNextSibling);
-      }
-      else {
+        this.body.dom.backgroundVertical.insertBefore(
+          background,
+          backgroundNextSibling
+        );
+      } else {
         this.body.dom.backgroundVertical.appendChild(background);
       }
       return this._isResized() || parentChanged;
@@ -2895,13 +2916,28 @@
       const orientation = this.options.orientation.axis;
 
       // calculate range and step (step such that we have space for 7 characters per label)
-      const start = availableUtils.convert(this.body.range.start, 'Number');
-      const end = availableUtils.convert(this.body.range.end, 'Number');
-      const timeLabelsize = this.body.util.toTime((this.props.minorCharWidth || 10) * this.options.maxMinorChars).valueOf();
-      let minimumStep = timeLabelsize - getHiddenDurationBefore(this.options.moment, this.body.hiddenDates, this.body.range, timeLabelsize);
+      const start = availableUtils.convert(this.body.range.start, "Number");
+      const end = availableUtils.convert(this.body.range.end, "Number");
+      const timeLabelsize = this.body.util
+        .toTime((this.props.minorCharWidth || 10) * this.options.maxMinorChars)
+        .valueOf();
+      let minimumStep =
+        timeLabelsize -
+        getHiddenDurationBefore(
+          this.options.moment,
+          this.body.hiddenDates,
+          this.body.range,
+          timeLabelsize
+        );
       minimumStep -= this.body.util.toTime(0).valueOf();
 
-      const step = new TimeStep(new Date(start), new Date(end), minimumStep, this.body.hiddenDates, this.options);
+      const step = new TimeStep(
+        new Date(start),
+        new Date(end),
+        minimumStep,
+        this.body.hiddenDates,
+        this.options
+      );
       step.setMoment(this.options.moment);
       if (this.options.format) {
         step.setFormat(this.options.format);
@@ -2960,23 +2996,34 @@
         prevWidth = width;
         width = xNext - x;
         switch (step.scale) {
-          case 'week':
+          case "week":
             showMinorGrid = true;
             showMiddleGrid = true;
             break;
           default:
-            showMinorGrid = (width >= prevWidth * 0.4);
-            showMiddleGrid = (width >= prevWidth * 0.4); 
+            showMinorGrid = width >= prevWidth * 0.4;
+            showMiddleGrid = width >= prevWidth * 0.4;
             break; // prevent displaying of the 31th of the month on a scale of 5 days
         }
 
         if (this.options.showMinorLabels && showMinorGrid) {
-          var label = this._repaintMinorText(x, step.getLabelMinor(current), orientation, className);
+          var label = this._repaintMinorText(
+            x,
+            step.getLabelMinor(current),
+            orientation,
+            className
+          );
           label.style.width = `${width}px`; // set width to prevent overflow
         }
 
         if (this.options.showMiddleLabels && showMiddleGrid) {
-          label = this._repaintMiddleText(x, step.getLabelMiddle(current), orientation, className, date);
+          label = this._repaintMiddleText(
+            x,
+            step.getLabelMiddle(current),
+            orientation,
+            className,
+            date
+          );
           label.style.width = `${width}px`; // set width to prevent overflow
         }
 
@@ -2985,11 +3032,16 @@
             if (xFirstMajorLabel == undefined) {
               xFirstMajorLabel = x;
             }
-            label = this._repaintMajorText(x, step.getLabelMajor(current), orientation, className);
+            label = this._repaintMajorText(
+              x,
+              step.getLabelMajor(current),
+              orientation,
+              className
+            );
           }
           line = this._repaintMajorLine(x, width, orientation, className);
-        }
-        else { // middle and minor line
+        } else {
+          // middle and minor line
           // if (showMiddleGrid) {
           //   line = this._repaintMiddleLine(x, width, orientation, className);
           //   continue;
@@ -3006,15 +3058,18 @@
       }
 
       if (count === MAX && !warnedForOverflow) {
-          console.warn(`Something is wrong with the Timeline scale. Limited drawing of grid lines to ${MAX} lines.`);
-          warnedForOverflow = true;
+        console.warn(
+          `Something is wrong with the Timeline scale. Limited drawing of grid lines to ${MAX} lines.`
+        );
+        warnedForOverflow = true;
       }
 
       // create a major label on the left when needed
       if (this.options.showMajorLabels) {
         const leftTime = this.body.util.toTime(0); // upper bound estimation
         const leftText = step.getLabelMajor(leftTime);
-        const widthText = leftText.length * (this.props.majorCharWidth || 10) + 10;
+        const widthText =
+          leftText.length * (this.props.majorCharWidth || 10) + 10;
 
         if (xFirstMajorLabel == undefined || widthText < xFirstMajorLabel) {
           this._repaintMajorText(0, leftText, orientation, className);
@@ -3022,7 +3077,7 @@
       }
 
       // Cleanup leftover DOM elements from the redundant list
-      availableUtils.forEach(this.dom.redundant, arr => {
+      availableUtils.forEach(this.dom.redundant, (arr) => {
         while (arr.length) {
           const elem = arr.pop();
           if (elem && elem.parentNode) {
@@ -3047,15 +3102,18 @@
 
       if (!label) {
         // create new label
-        const content = document.createTextNode('');
-        label = document.createElement('div');
+        const content = document.createTextNode("");
+        label = document.createElement("div");
         label.appendChild(content);
         this.dom.foreground.appendChild(label);
       }
       this.dom.minorTexts.push(label);
       label.innerHTML = availableUtils.xss(text);
 
-      let y = (orientation == 'top') ? this.props.majorLabelHeight + this.props.middleLabelHeight: 0;
+      let y =
+        orientation == "top"
+          ? this.props.majorLabelHeight + this.props.middleLabelHeight
+          : 0;
       this._setXY(label, x, y);
 
       label.className = `vis-text vis-minor ${className}`;
@@ -3070,18 +3128,18 @@
      * @param {string} text
      * @param {string} orientation   "top" or "bottom" (default)
      * @param {string} className
-     * @param {Date} date 
+     * @param {Date} date
      * @return {Element} Returns the HTML element of the created label
      * @private
      */
     _repaintMiddleText(x, text, orientation, className, date) {
       // reuse redundant label
       let label = this.dom.redundant.middleTexts.shift();
-      
+
       if (!label) {
         // create new label
-        const content = document.createTextNode('');
-        label = document.createElement('div');
+        const content = document.createTextNode("");
+        label = document.createElement("div");
         label.appendChild(content);
         this.dom.foreground.appendChild(label);
       }
@@ -3090,21 +3148,21 @@
       if (text != this.prevText) {
         label.innerHTML = availableUtils.xss(text);
       } else {
-        label.innerHTML = availableUtils.xss('　');
+        label.innerHTML = availableUtils.xss("　");
       }
       this.prevText = text;
-      let y = (orientation == 'top') ? this.props.majorLabelHeight -1: 0;
-      
+      let y = orientation == "top" ? this.props.majorLabelHeight - 1 : 0;
+
       this._setXY(label, x, y);
 
-      if (!this.isStarted && ('0' + date.getHours()).slice(-2) == text) {
+      if (!this.isStarted && ("0" + date.getHours()).slice(-2) == text) {
         this.isStarted = true;
-      } else if (this.isStarted && ('0' + date.getHours()).slice(-2) != text) {
+      } else if (this.isStarted && ("0" + date.getHours()).slice(-2) != text) {
         this.isStarted = false;
       }
       if (this.isStarted) {
         label.className = `vis-text vis-middle vis-ontime ${className}`;
-      }  else {
+      } else {
         label.className = `vis-text vis-middle vis-notontime ${className}`;
       }
 
@@ -3128,8 +3186,8 @@
 
       if (!label) {
         // create label
-        const content = document.createElement('div');
-        label = document.createElement('div');
+        const content = document.createElement("div");
+        label = document.createElement("div");
         label.appendChild(content);
         this.dom.foreground.appendChild(label);
       }
@@ -3138,7 +3196,10 @@
       label.className = `vis-text vis-major ${className}`;
       //label.title = title; // TODO: this is a heavy operation
 
-      let y = (orientation == 'top') ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight;
+      let y =
+        orientation == "top"
+          ? 0
+          : this.props.minorLabelHeight + this.props.middleLabelHeight;
       this._setXY(label, x, y);
 
       this.dom.majorTexts.push(label);
@@ -3154,7 +3215,7 @@
      */
     _setXY(label, x, y) {
       // If rtl is true, inverse x.
-      const directionX = this.options.rtl ? (x * -1) : x;
+      const directionX = this.options.rtl ? x * -1 : x;
       label.style.transform = `translate(${directionX}px, ${y}px)`;
     }
 
@@ -3172,22 +3233,33 @@
       let line = this.dom.redundant.lines.shift();
       if (!line) {
         // create vertical line
-        line = document.createElement('div');
+        line = document.createElement("div");
         this.dom.background.appendChild(line);
       }
       this.dom.lines.push(line);
 
       const props = this.props;
-      
+
       line.style.width = `${width}px`;
       line.style.height = `${props.minorLineHeight}px`;
 
-      let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset: 
-        this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset;
+      let y =
+        orientation == "top"
+          ? props.majorLabelHeight +
+            props.middleLabelHeight +
+            props.minorLabelHeight +
+            this.minorLineHightOffset
+          : this.body.domProps.top.height +
+            props.majorLabelHeight +
+            props.middleLabelHeight +
+            props.minorLabelHeight +
+            this.minorLineHightOffset;
       let x = left - props.minorLineWidth / 2;
 
       this._setXY(line, x, y);
-      line.className = `vis-grid ${this.options.rtl ?  'vis-vertical-rtl' : 'vis-vertical'} vis-minor ${className}`;
+      line.className = `vis-grid ${
+      this.options.rtl ? "vis-vertical-rtl" : "vis-vertical"
+    } vis-minor ${className}`;
 
       return line;
     }
@@ -3206,22 +3278,31 @@
       let line = this.dom.redundant.lines.shift();
       if (!line) {
         // create vertical line
-        line = document.createElement('div');
+        line = document.createElement("div");
         this.dom.background.appendChild(line);
       }
       this.dom.lines.push(line);
 
       const props = this.props;
-      
+
       line.style.width = `${width}px`;
       line.style.height = `${props.middleLineHeight}px`;
 
-      let y = (orientation == 'top') ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : 
-        this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
+      let y =
+        orientation == "top"
+          ? props.majorLabelHeight +
+            props.middleLabelHeight +
+            props.minorLabelHeight
+          : this.body.domProps.top.height +
+            props.majorLabelHeight +
+            props.middleLabelHeight +
+            props.minorLabelHeight;
       let x = left - props.middleLineWidth / 2;
 
       this._setXY(line, x, y);
-      line.className = `vis-grid ${this.options.rtl ?  'vis-vertical-rtl' : 'vis-vertical'} vis-middle ${className}`;
+      line.className = `vis-grid ${
+      this.options.rtl ? "vis-vertical-rtl" : "vis-vertical"
+    } vis-middle ${className}`;
 
       return line;
     }
@@ -3240,21 +3321,23 @@
       let line = this.dom.redundant.lines.shift();
       if (!line) {
         // create vertical line
-        line = document.createElement('div');
+        line = document.createElement("div");
         this.dom.background.appendChild(line);
       }
       this.dom.lines.push(line);
 
       const props = this.props;
-      
+
       line.style.width = `${width}px`;
       line.style.height = `${props.majorLineHeight}px`;
 
-      let y = (orientation == 'top') ? 0 : this.body.domProps.top.height;
+      let y = orientation == "top" ? 0 : this.body.domProps.top.height;
       let x = left - props.majorLineWidth / 2;
 
       this._setXY(line, x, y);
-      line.className = `vis-grid ${this.options.rtl ?  'vis-vertical-rtl' : 'vis-vertical'} vis-major ${className}`;
+      line.className = `vis-grid ${
+      this.options.rtl ? "vis-vertical-rtl" : "vis-vertical"
+    } vis-major ${className}`;
 
       return line;
     }
@@ -3270,11 +3353,11 @@
 
       // determine the char width and height on the minor axis
       if (!this.dom.measureCharMinor) {
-        this.dom.measureCharMinor = document.createElement('DIV');
-        this.dom.measureCharMinor.className = 'vis-text vis-minor vis-measure';
-        this.dom.measureCharMinor.style.position = 'absolute';
+        this.dom.measureCharMinor = document.createElement("DIV");
+        this.dom.measureCharMinor.className = "vis-text vis-minor vis-measure";
+        this.dom.measureCharMinor.style.position = "absolute";
 
-        this.dom.measureCharMinor.appendChild(document.createTextNode('0'));
+        this.dom.measureCharMinor.appendChild(document.createTextNode("0"));
         this.dom.foreground.appendChild(this.dom.measureCharMinor);
       }
       this.props.minorCharHeight = this.dom.measureCharMinor.clientHeight;
@@ -3282,23 +3365,23 @@
 
       // determine the char width and height on the middle axis
       if (!this.dom.measureCharMiddle) {
-        this.dom.measureCharMiddle = document.createElement('DIV');
-        this.dom.measureCharMiddle.className = 'vis-text vis-middle vis-measure';
-        this.dom.measureCharMiddle.style.position = 'absolute';
+        this.dom.measureCharMiddle = document.createElement("DIV");
+        this.dom.measureCharMiddle.className = "vis-text vis-middle vis-measure";
+        this.dom.measureCharMiddle.style.position = "absolute";
 
-        this.dom.measureCharMiddle.appendChild(document.createTextNode('0'));
+        this.dom.measureCharMiddle.appendChild(document.createTextNode("0"));
         this.dom.foreground.appendChild(this.dom.measureCharMiddle);
       }
       this.props.middleCharHeight = this.dom.measureCharMiddle.clientHeight;
       this.props.middleCharWidth = this.dom.measureCharMiddle.clientWidth;
-    
+
       // determine the char width and height on the major axis
       if (!this.dom.measureCharMajor) {
-        this.dom.measureCharMajor = document.createElement('DIV');
-        this.dom.measureCharMajor.className = 'vis-text vis-major vis-measure';
-        this.dom.measureCharMajor.style.position = 'absolute';
+        this.dom.measureCharMajor = document.createElement("DIV");
+        this.dom.measureCharMajor.className = "vis-text vis-major vis-measure";
+        this.dom.measureCharMajor.style.position = "absolute";
 
-        this.dom.measureCharMajor.appendChild(document.createTextNode('0'));
+        this.dom.measureCharMajor.appendChild(document.createTextNode("0"));
         this.dom.foreground.appendChild(this.dom.measureCharMajor);
       }
       this.props.majorCharHeight = this.dom.measureCharMajor.clientHeight;
@@ -3313,7 +3396,6 @@
       this.date = date;
     }
   }
-
 
   var warnedForOverflow = false;
 

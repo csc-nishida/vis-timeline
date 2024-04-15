@@ -5,7 +5,7 @@
  * Create a fully customizable, interactive timeline with items and ranges.
  *
  * @version 0.0.0-no-version
- * @date    2023-03-07T05:30:14.993Z
+ * @date    2024-04-13T01:35:49.231Z
  *
  * @copyright (c) 2011-2017 Almende B.V, http://almende.com
  * @copyright (c) 2017-2019 visjs contributors, https://github.com/visjs
@@ -18481,7 +18481,7 @@
 	    };
 	    _this.defaultOptions = {
 	      orientation: {
-	        axis: 'bottom'
+	        axis: "bottom"
 	      },
 	      // axis orientation: 'top' or 'bottom'
 	      showMinorLabels: true,
@@ -18501,7 +18501,7 @@
 	    _this.setOptions(options); // display setting for middleLabel
 
 
-	    _this.prevText = ''; // ajust border height
+	    _this.prevText = ""; // ajust border height
 
 	    _this.minorLineHightOffset = 3; // 実行日付
 
@@ -18527,22 +18527,22 @@
 	    value: function setOptions(options) {
 	      if (options) {
 	        // copy all options that we know
-	        availableUtils.selectiveExtend(['showMinorLabels', 'showMiddleLabels', 'showMajorLabels', 'showWeekScale', 'maxMinorChars', 'hiddenDates', 'timeAxis', 'moment', 'rtl'], this.options, options); // deep copy the format options
+	        availableUtils.selectiveExtend(["showMinorLabels", "showMiddleLabels", "showMajorLabels", "showWeekScale", "maxMinorChars", "hiddenDates", "timeAxis", "moment", "rtl"], this.options, options); // deep copy the format options
 
-	        availableUtils.selectiveDeepExtend(['format'], this.options, options);
+	        availableUtils.selectiveDeepExtend(["format"], this.options, options);
 
-	        if ('orientation' in options) {
-	          if (typeof options.orientation === 'string') {
+	        if ("orientation" in options) {
+	          if (typeof options.orientation === "string") {
 	            this.options.orientation.axis = options.orientation;
-	          } else if (_typeof(options.orientation) === 'object' && 'axis' in options.orientation) {
+	          } else if (_typeof(options.orientation) === "object" && "axis" in options.orientation) {
 	            this.options.orientation.axis = options.orientation.axis;
 	          }
 	        } // apply locale to moment.js
 	        // TODO: not so nice, this is applied globally to moment.js
 
 
-	        if ('locale' in options) {
-	          if (typeof moment$2.locale === 'function') {
+	        if ("locale" in options) {
+	          if (typeof moment$2.locale === "function") {
 	            // moment.js 2.8.1+
 	            moment$2.locale(options.locale);
 	          } else {
@@ -18558,10 +18558,10 @@
 	  }, {
 	    key: "_create",
 	    value: function _create() {
-	      this.dom.foreground = document.createElement('div');
-	      this.dom.background = document.createElement('div');
-	      this.dom.foreground.className = 'vis-time-axis vis-foreground';
-	      this.dom.background.className = 'vis-time-axis vis-background';
+	      this.dom.foreground = document.createElement("div");
+	      this.dom.background = document.createElement("div");
+	      this.dom.foreground.className = "vis-time-axis vis-foreground";
+	      this.dom.background.className = "vis-time-axis vis-background";
 	    }
 	    /**
 	     * Destroy the TimeAxis
@@ -18593,28 +18593,28 @@
 	      var foreground = this.dom.foreground;
 	      var background = this.dom.background; // determine the correct parent DOM element (depending on option orientation)
 
-	      var parent = this.options.orientation.axis == 'top' ? this.body.dom.top : this.body.dom.bottom;
+	      var parent = this.options.orientation.axis == "top" ? this.body.dom.top : this.body.dom.bottom;
 	      var parentChanged = foreground.parentNode !== parent; // calculate character width and height
 
 	      this._calculateCharSize(); // TODO: recalculate sizes only needed when parent is resized or options is changed
 
 
-	      var showMinorLabels = this.options.showMinorLabels && this.options.orientation.axis !== 'none';
-	      var showMiddleLabels = this.options.showMiddleLabels && this.options.orientation.axis !== 'none';
-	      var showMajorLabels = this.options.showMajorLabels && this.options.orientation.axis !== 'none'; // determine the width and height of the elemens for the axis
+	      var showMinorLabels = this.options.showMinorLabels && this.options.orientation.axis !== "none";
+	      var showMiddleLabels = this.options.showMiddleLabels && this.options.orientation.axis !== "none";
+	      var showMajorLabels = this.options.showMajorLabels && this.options.orientation.axis !== "none"; // determine the width and height of the elemens for the axis
 
 	      props.minorLabelHeight = showMinorLabels ? props.minorCharHeight : 0;
 	      props.middleLabelHeight = showMiddleLabels ? props.middleCharHeight : 0;
 	      props.majorLabelHeight = showMajorLabels ? props.majorCharHeight : 0;
 	      props.height = props.minorLabelHeight + props.middleCharHeight + props.majorLabelHeight;
 	      props.width = foreground.offsetWidth;
-	      props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
+	      props.minorLineHeight = this.body.domProps.root.height - props.majorLabelHeight - props.middleLabelHeight - (this.options.orientation.axis == "top" ? this.body.domProps.bottom.height : this.body.domProps.top.height);
 	      props.minorLineWidth = 1; // TODO: really calculate width
 
-	      props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - (this.options.orientation.axis == 'top' ? this.body.domProps.bottom.height : this.body.domProps.top.height);
+	      props.middleLineHeight = this.body.domProps.root.height - props.majorLabelHeight - (this.options.orientation.axis == "top" ? this.body.domProps.bottom.height : this.body.domProps.top.height);
 	      props.middleLineWidth = 1; // TODO: really calculate width
 
-	      props.majorLineHeight = props.minorLineHeight + props.majorLabelHeight;
+	      props.majorLineHeight = props.middleLineHeight + props.majorLabelHeight;
 	      props.majorLineWidth = 1; // TODO: really calculate width
 	      //  take foreground and background offline while updating (is almost twice as fast)
 
@@ -18651,8 +18651,8 @@
 	    value: function _repaintLabels() {
 	      var orientation = this.options.orientation.axis; // calculate range and step (step such that we have space for 7 characters per label)
 
-	      var start = availableUtils.convert(this.body.range.start, 'Number');
-	      var end = availableUtils.convert(this.body.range.end, 'Number');
+	      var start = availableUtils.convert(this.body.range.start, "Number");
+	      var end = availableUtils.convert(this.body.range.end, "Number");
 	      var timeLabelsize = this.body.util.toTime((this.props.minorCharWidth || 10) * this.options.maxMinorChars).valueOf();
 	      var minimumStep = timeLabelsize - getHiddenDurationBefore(this.options.moment, this.body.hiddenDates, this.body.range, timeLabelsize);
 	      minimumStep -= this.body.util.toTime(0).valueOf();
@@ -18713,7 +18713,7 @@
 	        width = xNext - x;
 
 	        switch (step.scale) {
-	          case 'week':
+	          case "week":
 	            showMinorGrid = true;
 	            showMiddleGrid = true;
 	            break;
@@ -18810,15 +18810,15 @@
 
 	      if (!label) {
 	        // create new label
-	        var content = document.createTextNode('');
-	        label = document.createElement('div');
+	        var content = document.createTextNode("");
+	        label = document.createElement("div");
 	        label.appendChild(content);
 	        this.dom.foreground.appendChild(label);
 	      }
 
 	      this.dom.minorTexts.push(label);
 	      label.innerHTML = availableUtils.xss(text);
-	      var y = orientation == 'top' ? this.props.majorLabelHeight + this.props.middleLabelHeight : 0;
+	      var y = orientation == "top" ? this.props.majorLabelHeight + this.props.middleLabelHeight : 0;
 
 	      this._setXY(label, x, y);
 
@@ -18832,7 +18832,7 @@
 	     * @param {string} text
 	     * @param {string} orientation   "top" or "bottom" (default)
 	     * @param {string} className
-	     * @param {Date} date 
+	     * @param {Date} date
 	     * @return {Element} Returns the HTML element of the created label
 	     * @private
 	     */
@@ -18847,8 +18847,8 @@
 
 	      if (!label) {
 	        // create new label
-	        var content = document.createTextNode('');
-	        label = document.createElement('div');
+	        var content = document.createTextNode("");
+	        label = document.createElement("div");
 	        label.appendChild(content);
 	        this.dom.foreground.appendChild(label);
 	      }
@@ -18858,17 +18858,17 @@
 	      if (text != this.prevText) {
 	        label.innerHTML = availableUtils.xss(text);
 	      } else {
-	        label.innerHTML = availableUtils.xss('　');
+	        label.innerHTML = availableUtils.xss("　");
 	      }
 
 	      this.prevText = text;
-	      var y = orientation == 'top' ? this.props.majorLabelHeight - 1 : 0;
+	      var y = orientation == "top" ? this.props.majorLabelHeight - 1 : 0;
 
 	      this._setXY(label, x, y);
 
-	      if (!this.isStarted && _sliceInstanceProperty(_context = '0' + date.getHours()).call(_context, -2) == text) {
+	      if (!this.isStarted && _sliceInstanceProperty(_context = "0" + date.getHours()).call(_context, -2) == text) {
 	        this.isStarted = true;
-	      } else if (this.isStarted && _sliceInstanceProperty(_context2 = '0' + date.getHours()).call(_context2, -2) != text) {
+	      } else if (this.isStarted && _sliceInstanceProperty(_context2 = "0" + date.getHours()).call(_context2, -2) != text) {
 	        this.isStarted = false;
 	      }
 
@@ -18899,8 +18899,8 @@
 
 	      if (!label) {
 	        // create label
-	        var content = document.createElement('div');
-	        label = document.createElement('div');
+	        var content = document.createElement("div");
+	        label = document.createElement("div");
 	        label.appendChild(content);
 	        this.dom.foreground.appendChild(label);
 	      }
@@ -18908,7 +18908,7 @@
 	      label.childNodes[0].innerHTML = availableUtils.xss(text);
 	      label.className = "vis-text vis-major ".concat(className); //label.title = title; // TODO: this is a heavy operation
 
-	      var y = orientation == 'top' ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight;
+	      var y = orientation == "top" ? 0 : this.props.minorLabelHeight + this.props.middleLabelHeight;
 
 	      this._setXY(label, x, y);
 
@@ -18952,7 +18952,7 @@
 
 	      if (!line) {
 	        // create vertical line
-	        line = document.createElement('div');
+	        line = document.createElement("div");
 	        this.dom.background.appendChild(line);
 	      }
 
@@ -18960,12 +18960,12 @@
 	      var props = this.props;
 	      line.style.width = "".concat(width, "px");
 	      line.style.height = "".concat(props.minorLineHeight, "px");
-	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset;
+	      var y = orientation == "top" ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight + this.minorLineHightOffset;
 	      var x = left - props.minorLineWidth / 2;
 
 	      this._setXY(line, x, y);
 
-	      line.className = _concatInstanceProperty(_context4 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-minor ")).call(_context4, className);
+	      line.className = _concatInstanceProperty(_context4 = "vis-grid ".concat(this.options.rtl ? "vis-vertical-rtl" : "vis-vertical", " vis-minor ")).call(_context4, className);
 	      return line;
 	    }
 	    /**
@@ -18988,7 +18988,7 @@
 
 	      if (!line) {
 	        // create vertical line
-	        line = document.createElement('div');
+	        line = document.createElement("div");
 	        this.dom.background.appendChild(line);
 	      }
 
@@ -18996,12 +18996,12 @@
 	      var props = this.props;
 	      line.style.width = "".concat(width, "px");
 	      line.style.height = "".concat(props.middleLineHeight, "px");
-	      var y = orientation == 'top' ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
+	      var y = orientation == "top" ? props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight : this.body.domProps.top.height + props.majorLabelHeight + props.middleLabelHeight + props.minorLabelHeight;
 	      var x = left - props.middleLineWidth / 2;
 
 	      this._setXY(line, x, y);
 
-	      line.className = _concatInstanceProperty(_context5 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-middle ")).call(_context5, className);
+	      line.className = _concatInstanceProperty(_context5 = "vis-grid ".concat(this.options.rtl ? "vis-vertical-rtl" : "vis-vertical", " vis-middle ")).call(_context5, className);
 	      return line;
 	    }
 	    /**
@@ -19024,7 +19024,7 @@
 
 	      if (!line) {
 	        // create vertical line
-	        line = document.createElement('div');
+	        line = document.createElement("div");
 	        this.dom.background.appendChild(line);
 	      }
 
@@ -19032,12 +19032,12 @@
 	      var props = this.props;
 	      line.style.width = "".concat(width, "px");
 	      line.style.height = "".concat(props.majorLineHeight, "px");
-	      var y = orientation == 'top' ? 0 : this.body.domProps.top.height;
+	      var y = orientation == "top" ? 0 : this.body.domProps.top.height;
 	      var x = left - props.majorLineWidth / 2;
 
 	      this._setXY(line, x, y);
 
-	      line.className = _concatInstanceProperty(_context6 = "vis-grid ".concat(this.options.rtl ? 'vis-vertical-rtl' : 'vis-vertical', " vis-major ")).call(_context6, className);
+	      line.className = _concatInstanceProperty(_context6 = "vis-grid ".concat(this.options.rtl ? "vis-vertical-rtl" : "vis-vertical", " vis-major ")).call(_context6, className);
 	      return line;
 	    }
 	    /**
@@ -19053,10 +19053,10 @@
 	      // example when any of the timelines parents had display:none for example.
 	      // determine the char width and height on the minor axis
 	      if (!this.dom.measureCharMinor) {
-	        this.dom.measureCharMinor = document.createElement('DIV');
-	        this.dom.measureCharMinor.className = 'vis-text vis-minor vis-measure';
-	        this.dom.measureCharMinor.style.position = 'absolute';
-	        this.dom.measureCharMinor.appendChild(document.createTextNode('0'));
+	        this.dom.measureCharMinor = document.createElement("DIV");
+	        this.dom.measureCharMinor.className = "vis-text vis-minor vis-measure";
+	        this.dom.measureCharMinor.style.position = "absolute";
+	        this.dom.measureCharMinor.appendChild(document.createTextNode("0"));
 	        this.dom.foreground.appendChild(this.dom.measureCharMinor);
 	      }
 
@@ -19064,10 +19064,10 @@
 	      this.props.minorCharWidth = this.dom.measureCharMinor.clientWidth; // determine the char width and height on the middle axis
 
 	      if (!this.dom.measureCharMiddle) {
-	        this.dom.measureCharMiddle = document.createElement('DIV');
-	        this.dom.measureCharMiddle.className = 'vis-text vis-middle vis-measure';
-	        this.dom.measureCharMiddle.style.position = 'absolute';
-	        this.dom.measureCharMiddle.appendChild(document.createTextNode('0'));
+	        this.dom.measureCharMiddle = document.createElement("DIV");
+	        this.dom.measureCharMiddle.className = "vis-text vis-middle vis-measure";
+	        this.dom.measureCharMiddle.style.position = "absolute";
+	        this.dom.measureCharMiddle.appendChild(document.createTextNode("0"));
 	        this.dom.foreground.appendChild(this.dom.measureCharMiddle);
 	      }
 
@@ -19075,10 +19075,10 @@
 	      this.props.middleCharWidth = this.dom.measureCharMiddle.clientWidth; // determine the char width and height on the major axis
 
 	      if (!this.dom.measureCharMajor) {
-	        this.dom.measureCharMajor = document.createElement('DIV');
-	        this.dom.measureCharMajor.className = 'vis-text vis-major vis-measure';
-	        this.dom.measureCharMajor.style.position = 'absolute';
-	        this.dom.measureCharMajor.appendChild(document.createTextNode('0'));
+	        this.dom.measureCharMajor = document.createElement("DIV");
+	        this.dom.measureCharMajor.className = "vis-text vis-major vis-measure";
+	        this.dom.measureCharMajor.style.position = "absolute";
+	        this.dom.measureCharMajor.appendChild(document.createTextNode("0"));
 	        this.dom.foreground.appendChild(this.dom.measureCharMajor);
 	      }
 
